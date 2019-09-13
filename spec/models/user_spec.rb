@@ -5,11 +5,7 @@ describe User, type: :model do
     it {should validate_presence_of(:email)}
     it {should validate_uniqueness_of(:email)}
     it {should validate_confirmation_of(:password)}
-    # it {should validate_presence_of(:name)}
-    # it {should validate_presence_of(:address)}
-    # it {should validate_presence_of(:city)}
-    # it {should validate_presence_of(:state)}
-    # it {should validate_presence_of(:zip)}
+    it {should validate_presence_of(:name)}
     it {should allow_value(nil).for(:merchant)}
   end
 
@@ -20,7 +16,7 @@ describe User, type: :model do
   describe "model methods" do
     before :each do
       @dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
-      @sue = @dog_shop.users.create(name: 'Sue', address: '12345 C St', city: 'Los Angeles', state: 'CA', zip: 90210, email: 'sue@email.com', password: 'sue', password_confirmation: 'sue', role: 3)
+      @sue = @dog_shop.users.create(name: 'Sue', email: 'sue@email.com', password: 'sue', password_confirmation: 'sue', role: 3)
     end
 
     it "should confirm if a user works at a merchant" do
