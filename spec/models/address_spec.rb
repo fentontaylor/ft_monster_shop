@@ -9,4 +9,8 @@ describe Address do
     it {should validate_presence_of(:zip)}
     it {should validate_presence_of(:nickname)}
   end
+
+  describe 'relationships' do
+    it { should belong_to :user }
+  end
 end
