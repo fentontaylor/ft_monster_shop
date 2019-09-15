@@ -36,6 +36,8 @@ describe 'User clicks link to add a new address from their profile' do
       expect(page).to have_content(address.city)
       expect(page).to have_content(address.state)
       expect(page).to have_content(address.zip)
+      expect(page).to have_link('Edit Address')
+      expect(page).to have_link('Delete Address')
     end
   end
 end

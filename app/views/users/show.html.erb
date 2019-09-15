@@ -17,6 +17,8 @@
         <p><%= address.name %></p>
         <p><%= address.address %></p>
         <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
+        <p><%= link_to 'Edit Address', user_address_edit_path(@user, address) %></p>
+        <p><%= link_to 'Delete Address', user_address_destroy_path(@user, address) %></p>
       </section>
     <% end %>
   <% end %>

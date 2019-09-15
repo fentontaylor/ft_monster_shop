@@ -38,6 +38,9 @@ Rails.application.routes.draw do
 
   get '/users/:id/addresses/new', to: 'addresses#new', as: :user_address_new
   post '/users/:id/addresses', to: 'addresses#create', as: :user_address_create
+  get '/users/:user_id/addresses/:address_id/edit', to: 'addresses#edit', as: :user_address_edit
+  patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
+  delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
 
   get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
   get '/merchant/items', to: 'merchant/dashboard#items'
