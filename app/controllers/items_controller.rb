@@ -33,12 +33,12 @@ class ItemsController < ApplicationController
   #   end
   # end
   #
-  def destroy
-    item = Item.find(params[:id])
-    item.reviews.destroy_all
-    item.destroy
-    redirect_to "/items"
-  end
+  # def destroy
+  #   item = Item.find(params[:id])
+  #   item.reviews.destroy_all
+  #   item.destroy
+  #   redirect_to "/items"
+  # end
 
   private
 

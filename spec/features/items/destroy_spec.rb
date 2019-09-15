@@ -30,7 +30,7 @@ describe 'item delete' do
 
       click_on "Delete Item"
 
-      expect(current_path).to eq("/items")
+      expect(current_path).to eq("/merchant/items")
       expect("item-#{chain.id}").to be_present
     end
 

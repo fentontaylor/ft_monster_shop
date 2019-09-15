@@ -62,7 +62,7 @@ describe "As a merchant admin" do
 
         click_on "Edit Item"
 
-        expect(current_path).to eq("/items/#{@tire.id}/edit")
+        expect(current_path).to eq("/merchant/items/#{@tire.id}/edit")
         expect(page).to have_link("Gatorskins")
         expect(find_field('Name').value).to eq "Gatorskins"
         expect(find_field('Price').value).to eq "100"
@@ -84,15 +84,16 @@ describe "As a merchant admin" do
 
         click_button "Update Item"
 
-        expect(current_path).to eq("/items/#{@tire.id}")
-        expect(page).to have_content("GatorSkins")
-        expect(page).to_not have_content("Gatorskins")
-        expect(page).to have_content("Price: $110")
-        expect(page).to have_content("Inventory: 11")
-        expect(page).to_not have_content("Inventory: 12")
-        expect(page).to_not have_content("Price: $100")
-        expect(page).to have_content("They're a bit more expensive, and they kinda do pop sometimes, but whatevs.. this is retail.")
-        expect(page).to_not have_content("They'll never pop!")
+        expect(current_path).to eq("/merchant/items")
+
+        within "#merchant-item-#{@tire.id}" do
+          expect(page).to have_content("GatorSkins")
+          expect(page).to_not have_content("Gatorskins")
+          expect(page).to have_content("$110")
+          expect(page).to_not have_content("$100")
+          expect(page).to have_content("11")
+          expect(page).to_not have_content("12")
+        end
       end
 
       it 'I get a flash message if entire form is not filled out' do
@@ -101,14 +102,14 @@ describe "As a merchant admin" do
         click_on "Edit Item"
 
         fill_in 'Name', with: ""
-        fill_in 'Price', with: 110
+        fill_in 'Price', with: ""
         fill_in 'Description', with: "They're a bit more expensive, and they kinda do pop sometimes, but whatevs.. this is retail."
         fill_in 'Image', with: ""
         fill_in 'Inventory', with: 11
 
         click_button "Update Item"
 
-        expect(page).to have_content("Name can't be blank and Image can't be blank")
+        expect(page).to have_content("Name can't be blank, Price can't be blank, and Price is not a number")
         expect(page).to have_button("Update Item")
       end
     end
