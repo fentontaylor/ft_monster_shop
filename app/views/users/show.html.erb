@@ -1,8 +1,5 @@
 <section class="user-profile">
   <h2><%= @user.name %>'s Profile</h2>
-  <p style="font-weight:bold;">Address:</p>
-  <!-- <p>< %= @user.address %></p>
-  <p>< %= "#{@user.city}, #{@user.state} #{@user.zip}" %></p> -->
   <p><span style="font-weight:bold;">Email: </span><%= @user.email %></p>
   <br>
     <% unless @admin %>
@@ -10,4 +7,6 @@
       <%= link_to 'Change Password', '/profile/edit_password', class: 'btn-small' %>
       <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
     <% end %>
+  <h3>My Addresses</h3>
+  <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
 </section>

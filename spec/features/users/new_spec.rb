@@ -47,6 +47,7 @@ describe 'User clicks link to sign up' do
 
     expect(page).to have_content('Email has already been taken')
   end
+  
   it "needs matching passwords" do
     visit '/register'
 

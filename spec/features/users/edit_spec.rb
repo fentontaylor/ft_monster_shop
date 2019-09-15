@@ -23,10 +23,6 @@ describe 'User clicks Edit Profile link in their profile' do
     click_link 'Edit Profile'
 
     fill_in 'Name', with: 'Maria'
-    fill_in 'Address', with: '123 A st.'
-    fill_in 'City', with: 'San Pedro'
-    fill_in 'State', with: 'CA'
-    fill_in 'Zip', with: '92345'
     fill_in 'Email', with: 'maria@email.com'
 
     click_on 'Update Profile'
@@ -35,8 +31,6 @@ describe 'User clicks Edit Profile link in their profile' do
 
     within '.user-profile' do
       expect(page).to have_content("Maria's Profile")
-      expect(page).to have_content("123 A st.")
-      expect(page).to have_content("San Pedro, CA 92345")
       expect(page).to have_content("Email: maria@email.com")
     end
   end
@@ -55,15 +49,11 @@ describe 'User clicks Edit Profile link in their profile' do
     click_link 'Edit Profile'
 
     fill_in 'Name', with: nil
-    fill_in 'Address', with: nil
-    fill_in 'City', with: nil
-    fill_in 'State', with: nil
-    fill_in 'Zip', with: nil
     fill_in 'Email', with: nil
 
     click_on 'Update Profile'
 
     expect(current_path).to eq('/profile/edit')
-    expect(page).to have_content("Name can't be blank, Address can't be blank, City can't be blank, State can't be blank, Zip can't be blank, and Email can't be blank")
+    expect(page).to have_content("Name can't be blank and Email can't be blank")
   end
 end

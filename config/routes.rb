@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
   root to: 'welcome#home'
   get '/', to: 'welcome#home'
   get '/login', to: 'sessions#new'
@@ -38,6 +36,8 @@ Rails.application.routes.draw do
   get '/profile/edit_password', to: 'users#edit_password'
   patch '/profile/edit_password', to: 'users#update_password'
 
+  get '/users/:id/addresses/new', to: 'addresses#new', as: :user_address_new
+
   get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
   get '/merchant/items', to: 'merchant/dashboard#items'
   get '/merchant/items/new', to: 'merchant/items#new'
@@ -57,6 +57,6 @@ Rails.application.routes.draw do
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
 
   resources :password_resets
-
+  get 'password_resets/new'
   match "*path", to: "welcome#catch_404", via: :all
 end
