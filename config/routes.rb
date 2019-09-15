@@ -36,8 +36,8 @@ Rails.application.routes.draw do
   get '/profile/edit_password', to: 'users#edit_password'
   patch '/profile/edit_password', to: 'users#update_password'
 
-  get '/users/:id/addresses/new', to: 'addresses#new', as: :user_address_new
-  post '/users/:id/addresses', to: 'addresses#create', as: :user_address_create
+  get '/users/:user_id/addresses/new', to: 'addresses#new', as: :user_address_new
+  post '/users/:user_id/addresses', to: 'addresses#create', as: :user_address_create
   get '/users/:user_id/addresses/:address_id/edit', to: 'addresses#edit', as: :user_address_edit
   patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
   delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
