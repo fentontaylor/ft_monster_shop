@@ -1,25 +1,29 @@
 <h1>Your Orders</h1>
-<section class = "shipping-address">
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Date Placed</th>
-      <th>Last Updated</th>
-      <th>Status</th>
-      <th>Item Count</th>
-      <th>Grand Total</th>
-    </tr>
-    <% @user.orders.each do |order| %>
-        <tr>
-          <section id = "order-<%=order.id%>">
-            <td><%= link_to "Order #{order.id}", "/profile/orders/#{order.id}", class: 'reg-link' %></td>
-            <td><p><%= order.created_at.strftime('%D') %></p></td>
-            <td><p><%= order.updated_at.strftime('%D') %></p></td>
-            <td><p><%= order.status %></p></td>
-            <td><p><%= order.items_count %></p></td>
-            <td><p><%= number_to_currency order.grandtotal %></p></td>
-          </section>
-        </tr>
-      <% end %>
-  </table>
-</section>
+<% unless @user.orders.empty? %>
+  <section class = "shipping-address">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Date Placed</th>
+        <th>Last Updated</th>
+        <th>Status</th>
+        <th>Item Count</th>
+        <th>Grand Total</th>
+      </tr>
+      <% @user.orders.each do |order| %>
+          <tr>
+            <section id = "order-<%=order.id%>">
+              <td><%= link_to "Order #{order.id}", "/profile/orders/#{order.id}", class: 'reg-link' %></td>
+              <td><p><%= order.created_at.strftime('%D') %></p></td>
+              <td><p><%= order.updated_at.strftime('%D') %></p></td>
+              <td><p><%= order.status %></p></td>
+              <td><p><%= order.items_count %></p></td>
+              <td><p><%= number_to_currency order.grandtotal %></p></td>
+            </section>
+          </tr>
+        <% end %>
+    </table>
+  </section>
+<% else %>
+  <p>No orders yet</p>
+<% end %>

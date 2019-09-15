@@ -22,12 +22,12 @@ describe 'admin users show' do
       expect(current_path).to eq("/admin/users/#{@user_1.id}")
 
       expect(page).to have_content("#{@user_1.name}'s Profile")
-      expect(page).to have_content("#{@user_1.address}")
-      expect(page).to have_content("#{@user_1.city}, #{@user_1.state} #{@user_1.zip}")
       expect(page).to have_content("Email: #{@user_1.email}")
 
       expect(page).to_not have_link('Edit Profile')
       expect(page).to_not have_link('Change Password')
+      expect(page).to_not have_link('New Address')
+
     end
   end
 end
