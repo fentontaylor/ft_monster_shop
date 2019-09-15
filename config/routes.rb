@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   patch '/profile/edit_password', to: 'users#update_password'
 
   get '/users/:id/addresses/new', to: 'addresses#new', as: :user_address_new
+  post '/users/:id/addresses', to: 'addresses#create', as: :user_address_create
 
   get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
   get '/merchant/items', to: 'merchant/dashboard#items'

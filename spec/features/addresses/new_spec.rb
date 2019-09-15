@@ -16,7 +16,8 @@ describe 'User clicks link to add a new address from their profile' do
     click_link 'New Address'
     expect(current_path).to eq(user_address_new_path(user))
 
-    fill_in 'Address Nickname', with: 'Home'
+    fill_in 'Address nickname', with: 'Home'
+    fill_in 'Name', with: 'Curly'
     fill_in 'Address', with: '2345 My Street'
     fill_in 'City', with: 'Cool City'
     fill_in 'State', with: 'CO'
@@ -24,15 +25,17 @@ describe 'User clicks link to add a new address from their profile' do
 
     click_on 'Create Address'
 
-    expect(current_path).to eq(profile_path(user))
+    expect(current_path).to eq("/profile")
 
     address = user.addresses.last
 
-    within "#address-#{address.id}"
-    expect(page).to have_content(address.nickname)
-    expect(page).to have_content(address.address)
-    expect(page).to have_content(address.city)
-    expect(page).to have_content(address.state)
-    expect(page).to have_content(address.zip)
+    within "#address-#{address.id}" do
+      expect(page).to have_content(address.nickname)
+      expect(page).to have_content(address.name)
+      expect(page).to have_content(address.address)
+      expect(page).to have_content(address.city)
+      expect(page).to have_content(address.state)
+      expect(page).to have_content(address.zip)
+    end
   end
 end

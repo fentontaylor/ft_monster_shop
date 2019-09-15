@@ -1,7 +1,9 @@
 <center>
-  <%= form_for @address do |f| %>
-    <%= f.label 'Address nickname' %>
+  <%= form_for [@user, @address], url: path do |f| %>
+    <%= f.label :nickname, 'Address nickname' %>
     <%= f.text_field :nickname %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
     <%= f.label :address %>
     <%= f.text_field :address %>
     <%= f.label :city %>

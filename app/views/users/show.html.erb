@@ -8,5 +8,16 @@
       <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
     <% end %>
   <h3>My Addresses</h3>
-  <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
+  <% if @user.addresses.empty? %>
+    <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
+  <% else %>
+    <% @user.addresses.each do |address| %>
+      <section id="address-<%= address.id %>">
+        <h4><%= address.nickname %></h4>
+        <p><%= address.name %></p>
+        <p><%= address.address %></p>
+        <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
+      </section>
+    <% end %>
+  <% end %>
 </section>
