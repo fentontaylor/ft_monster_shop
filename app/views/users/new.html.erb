@@ -3,14 +3,6 @@
     <%= form_for @user do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name %>
-      <%= f.label :address %>
-      <%= f.text_field :address %>
-      <%= f.label :city %>
-      <%= f.text_field :city %>
-      <%= f.label :state %>
-      <%= f.text_field :state %>
-      <%= f.label :zip %>
-      <%= f.text_field :zip %>
       <%= f.label :email %>
       <%= f.email_field :email, value: nil %>
       <%= f.label :password %>
@@ -18,6 +10,6 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
       <%= f.submit 'Submit' %>
-  <% end %>
+    <% end %>
 
 </center>

@@ -9,6 +9,6 @@ describe 'factory test' do
     address3 = create(:address, user: user2)
 
     address4 = create(:address)
-    binding.pry
+    # binding.pry
   end
 end
