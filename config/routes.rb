@@ -62,5 +62,6 @@ Rails.application.routes.draw do
 
   resources :password_resets
   get 'password_resets/new'
+  
   match "*path", to: "welcome#catch_404", via: :all
 end

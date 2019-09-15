@@ -32,7 +32,11 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-
+    if session[:user_id] == @user.id
+      @address.destroy
+      flash[:success] = "#{@address.nickname} address has been deleted"
+      redirect_to '/profile'
+    end
   end
 
   private
