@@ -11,6 +11,7 @@
   <% if @user.addresses.empty? %>
     <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
   <% else %>
+    <p><%= link_to 'New Address', user_address_new_path(@user), class: 'btn-small' %></p>
     <% @user.addresses.each do |address| %>
       <section id="address-<%= address.id %>">
         <h4><%= address.nickname %></h4>
