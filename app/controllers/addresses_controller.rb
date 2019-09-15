@@ -9,6 +9,7 @@ class AddressesController < ApplicationController
   def create
     @address = @user.addresses.new(address_params)
     if @address.save
+      flash[:success] = "#{@address.nickname} address added"
       redirect_to "/profile"
     else
       flash[:error] = @address.errors.full_messages.to_sentence
@@ -22,10 +23,11 @@ class AddressesController < ApplicationController
   def update
     @address.update(address_params)
     if @address.save
+      flash[:success] = "#{@address.nickname} address updated"
       redirect_to '/profile'
     else
       flash[:error] = @address.errors.full_messages.to_sentence
-      render :edit
+      redirect_to user_address_edit_path(@user, @address)
     end
   end
 

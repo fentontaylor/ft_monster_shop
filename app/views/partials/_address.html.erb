@@ -1,17 +1,17 @@
 <center>
   <%= form_for [@user, @address], url: path do |f| %>
     <%= f.label :nickname, 'Address nickname' %>
-    <%= f.text_field :nickname %>
+    <%= f.text_field :nickname, value: @address.nickname %>
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, value: @address.name %>
     <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, value: @address.address %>
     <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, value: @address.city %>
     <%= f.label :state %>
     <%= f.select :state, options_for_select(us_states, @address.state) %>
     <%= f.label :zip %>
-    <%= f.text_field :zip %>
+    <%= f.text_field :zip, value: @address.zip %>
     <%= f.submit %>
   <% end %>
 </center>
