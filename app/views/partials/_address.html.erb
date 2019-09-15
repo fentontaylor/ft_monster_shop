@@ -1,13 +1,15 @@
-<%= form_for resource do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :state %>
-  <%= f.text_field :state %>
-  <%= f.label :zip %>
-  <%= f.text_field :zip %>
-  <%= f.submit %>
-<% end %>
+<center>
+  <%= form_for @address do |f| %>
+    <%= f.label 'Address nickname' %>
+    <%= f.text_field :nickname %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+    <%= f.label :zip %>
+    <%= f.text_field :zip %>
+    <%= f.submit %>
+  <% end %>
+</center>
