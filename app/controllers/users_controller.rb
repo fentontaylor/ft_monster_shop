@@ -19,6 +19,17 @@ class UsersController <ApplicationController
     @user = User.find_by(id: session[:user_id])
   end
 
+  def update
+    user = User.find(session[:user_id])
+    if user.update(profile_params)
+      flash[:success] = 'Profile updated'
+      redirect_to '/profile'
+    else
+      flash[:error] = user.errors.full_messages.uniq.to_sentence
+      redirect_to '/profile/edit'
+    end
+  end
+  
   def show
     unless session[:user_id]
       render file: "/public/404"
@@ -29,17 +40,6 @@ class UsersController <ApplicationController
       else
         @user = User.find_by(id: session[:user_id])
       end
-    end
-  end
-
-  def update
-    user = User.find(session[:user_id])
-    if user.update(profile_params)
-      flash[:success] = 'Profile updated'
-      redirect_to '/profile'
-    else
-      flash[:error] = user.errors.full_messages.uniq.to_sentence
-      redirect_to '/profile/edit'
     end
   end
 

@@ -41,4 +41,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: "test.localhost:3000" }
+
+  config.action_controller.include_all_helpers = true
 end

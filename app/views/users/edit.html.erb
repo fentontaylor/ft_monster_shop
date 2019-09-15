@@ -1,10 +1,10 @@
 <center>
-    <h2>Edit Your Profile</h2>
-    <%= form_for :users_edit, method: :patch do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name, value: @user.name %>
-      <%= f.label :email %>
-      <%= f.email_field :email, value: @user.email %>
-      <%= f.submit 'Update Profile' %>
-    <% end %>
+  <h2>Edit Your Profile</h2>
+  <%= form_for :users_edit, method: :patch do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, value: @user.name %>
+    <%= f.label :email %>
+    <%= f.email_field :email, value: @user.email %>
+    <%= f.submit 'Update Profile' %>
+  <% end %>
 </center>

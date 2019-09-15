@@ -11,6 +11,7 @@
   <% if @user.addresses.empty? %>
     <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
   <% else %>
+    <p><%= link_to 'New Address', user_address_new_path(@user), class: 'btn-small' %></p>
     <% @user.addresses.each do |address| %>
       <section id="address-<%= address.id %>">
         <h4><%= address.nickname %></h4>
@@ -18,7 +19,7 @@
         <p><%= address.address %></p>
         <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
         <p><%= link_to 'Edit Address', user_address_edit_path(@user, address) %></p>
-        <p><%= link_to 'Delete Address', user_address_destroy_path(@user, address) %></p>
+        <p><%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete %></p>
       </section>
     <% end %>
   <% end %>
