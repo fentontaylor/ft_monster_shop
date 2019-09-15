@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'item delete', type: :feature do
-  describe 'when I visit an item show page' do
+describe 'item delete' do
+  describe 'When a merchant_admin visits an item show page' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @m_admin = create(:user, role: 3, merchant_id: @meg.id)
@@ -20,9 +20,8 @@ RSpec.describe 'item delete', type: :feature do
         click_on 'Log In'
       end
     end
-    
+
     it 'I can delete an item' do
-      bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       chain = @meg.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
 
       visit "/items/#{chain.id}"
