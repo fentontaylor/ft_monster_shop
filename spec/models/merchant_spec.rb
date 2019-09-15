@@ -22,7 +22,7 @@ describe Merchant, type: :model do
     end
 
     it "works here" do
-      sue = @meg.users.create(name: 'Sue', address: '12345 C St', city: 'Los Angeles', state: 'CA', zip: 90210, email: 'sue@email.com', password: 'sue', password_confirmation: 'sue', role: 3)
+      sue = @meg.users.create(name: 'Sue', email: 'sue@email.com', password: 'sue', password_confirmation: 'sue', role: 3)
 
       expect(@meg.works_here?(sue.merchant.id)).to be true
     end
