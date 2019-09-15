@@ -25,8 +25,11 @@
         <p><%= address.address %></p>
         <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
         <% unless @admin %>
-          <p><%= link_to 'Edit Address', user_address_edit_path(@user, address) %></p>
-          <p><%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete %></p>
+          <p>
+            <%= link_to 'Edit Address', user_address_edit_path(@user, address), class: 'reg-link' %>
+            <span> | </span>
+            <%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete, class: 'reg-link' %>
+          </p>
         <% end %>
       </section>
     <% end %>
