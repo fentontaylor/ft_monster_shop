@@ -3,17 +3,8 @@
     <%= form_for :users_edit, method: :patch do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, value: @user.name %>
-      <%= f.label :address %>
-      <%= f.text_field :address, value: @user.address %>
-      <%= f.label :city %>
-      <%= f.text_field :city, value: @user.city %>
-      <%= f.label :state %>
-      <%= f.text_field :state, value: @user.state %>
-      <%= f.label :zip %>
-      <%= f.text_field :zip, value: @user.zip %>
       <%= f.label :email %>
       <%= f.email_field :email, value: @user.email %>
       <%= f.submit 'Update Profile' %>
-  <% end %>
-
+    <% end %>
 </center>
