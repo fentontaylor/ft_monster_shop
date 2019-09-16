@@ -4,13 +4,14 @@ class AddressesController < ApplicationController
 
   def new
     @address = @user.addresses.new
+    session[:return_to] = request.referer
   end
 
   def create
     @address = @user.addresses.new(address_params)
     if @address.save
       flash[:success] = "#{@address.nickname} address added"
-      redirect_to "/profile"
+      redirect_to session.delete(:return_to)
     else
       flash[:error] = @address.errors.full_messages.to_sentence
       render :new

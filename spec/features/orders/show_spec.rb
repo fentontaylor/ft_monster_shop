@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'user order show page' do
   before :each do
+
     @tire = create(:item, inventory: 10, price: 35)
     @paper = create(:item, inventory: 10, price: 40)
     @order = create(:order)
@@ -18,10 +19,11 @@ describe 'user order show page' do
       click_on 'Log In'
     end
   end
+
   it "shows info on a single order" do
     visit '/profile/orders'
 
-    click_link @order.id
+    click_link "Order ##{@order.id}"
 
     expect(current_path).to eq("/profile/orders/#{@order.id}")
 

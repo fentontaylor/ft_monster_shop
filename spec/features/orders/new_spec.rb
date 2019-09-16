@@ -63,8 +63,24 @@ describe "New Order Page" do
       end
 
       expect(page).to have_content("Order Total: $142")
-      expect(page).to have_content('Select shipping address')
-      expect(page).to have_link('Create Order')
+      expect(page).to_not have_link('Create Order')
+
+      within '.address-select' do
+        click_on "#{user.addresses.first.nickname}"
+      end
+
+      click_link 'Create Order'
+
+      new_order = Order.last
+
+      expect(current_path).to eq("/profile/orders")
+
+      expect(page).to have_content("Thankz for your business, dawg!")
+      expect(page).to have_content(new_order.updated_at.strftime('%D'))
+      expect(page).to have_content(new_order.status)
+      expect(page).to have_content(new_order.items_count)
+      expect(page).to have_content("$142.00")
+      expect(page).to have_content(new_order.created_at.strftime('%D'))
     end
   end
 end

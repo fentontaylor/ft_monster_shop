@@ -13,6 +13,7 @@ RSpec.describe "As a visitor" do
       click_on 'Log In'
     end
   end
+
   describe "When I visit a merchant show page" do
     it "I can delete a merchant" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 80203)
@@ -48,7 +49,7 @@ RSpec.describe "As a visitor" do
       pulltoy = brian.items.create(name: "Pulltoy", description: "It'll never fall apart!", price: 14, image: "https://www.valupets.com/media/catalog/product/cache/1/image/650x/040ec09b1e35df139433887a97daa66f/l/a/large_rubber_dog_pull_toy.jpg", inventory: 7)
 
       user = create(:user)
-
+      user.addresses << create(:address)
       click_on 'Log Out'
 
       visit '/login'
@@ -71,6 +72,10 @@ RSpec.describe "As a visitor" do
 
       visit "/cart"
       click_on "Checkout"
+
+      within '.address-select' do
+        click_on "#{user.addresses.first.nickname}"
+      end
 
       click_link "Create Order"
 
