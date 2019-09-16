@@ -6,6 +6,8 @@ class OrdersController <ApplicationController
 
   def new
     @user = User.find(session[:user_id])
+    @addresses = @user.addresses
+    @selected = Address.find_by(nickname: params[:address])
   end
 
   def cancel_item_orders(order)
@@ -62,19 +64,17 @@ class OrdersController <ApplicationController
     redirect_to "/admin"
   end
 
-  def shipping_options
-    @user = User.find(session[:user_id])
-  end
-
   private
 
   def user_info(user)
     info = Hash.new
+    # binding.pry
+    address = user.addresses.find_by(nickname: params[:address])
     info[:name] = user.name
-    info[:address] = user.address
-    info[:city] = user.city
-    info[:state] = user.state
-    info[:zip] = user.zip
+    info[:address] = address.address
+    info[:city] = address.city
+    info[:state] = address.state
+    info[:zip] = address.zip
     info
   end
 end

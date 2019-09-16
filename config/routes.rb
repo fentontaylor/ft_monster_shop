@@ -21,10 +21,10 @@ Rails.application.routes.draw do
   delete '/cart/:item_id', to: 'cart#remove_item'
   patch '/cart/:item_id/:increment_decrement', to: 'cart#increment_decrement'
 
-  resources :orders, only: [:new, :create]
+  resources :orders, only: [:new]
+  post '/orders/:address', to: 'orders#create'
   patch '/orders/:id', to: 'orders#cancel', as: :order_cancel
   get '/orders/:order_id', to: 'orders#show', as: :order
-  get '/orders/new/shipping_options', to: 'orders#shipping_options', as: :shipping_options
   patch '/orders/:order_id/ship', to: 'orders#ship', as: :shipped_order
   get '/profile/orders/:order_id', to: 'orders#show'
   get '/profile/orders', to: 'orders#index'

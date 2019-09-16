@@ -20,5 +20,24 @@
   <% end %>
 </table>
 <h3 align="center">Order Total: <%= number_to_currency(cart.total)%></h3>
-<p align="center"><%= link_to 'Proceed To Shipping Options', '/orders/new/shipping_options', class: 'btn' %></p>
-<!-- <p align="center">< %= link_to "Create Order", orders_path,  class: 'btn', id: 'green-btn', method: :post %></p> -->
+
+<center>
+<div class="dropdown">
+  <button class="btn" id="address-btn">Shipping Address</button>
+  <div class="dropdown-content">
+    <% @addresses.each do |address| %>
+      <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
+    <% end %>
+  </div>
+</div>
+  <% if @selected %>
+    <section class="new-order-address" id="address-#{@selected.id}">
+      <p><%= @selected.name %></p>
+      <p><%= @selected.address %></p>
+      <p><%= "#{@selected.city}, #{@selected.state} #{@selected.zip}" %></p>
+    </section>
+    <p align="center"><%= link_to "Create Order", "/orders/#{@selected.nickname}",  class: 'btn', id: 'green-btn', method: :post %></p>
+  <% else %>
+    <p>☝️ Please select an address ☝️</p>
+  <% end %>
+</center>
