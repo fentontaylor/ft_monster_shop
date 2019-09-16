@@ -19,13 +19,14 @@ class AddressesController < ApplicationController
   end
 
   def edit
+    session[:return_to] = request.referer
   end
 
   def update
     @address.update(address_params)
     if @address.save
       flash[:success] = "#{@address.nickname} address updated"
-      redirect_to '/profile'
+      redirect_to session.delete(:return_to)
     else
       flash[:error] = @address.errors.full_messages.to_sentence
       redirect_to user_address_edit_path(@user, @address)

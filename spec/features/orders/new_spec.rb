@@ -24,6 +24,7 @@ describe "New Order Page" do
 
       user = create(:user)
       2.times { user.addresses << create(:address) }
+      address = user.addresses.first
 
       visit '/login'
 
@@ -66,9 +67,13 @@ describe "New Order Page" do
       expect(page).to_not have_link('Create Order')
 
       within '.address-select' do
-        click_on "#{user.addresses.first.nickname}"
+        click_on "#{address.nickname}"
       end
 
+      expect(page).to have_content(address.name)
+      expect(page).to have_content(address.address)
+      expect(page).to have_content("#{address.city}, #{address.state} #{address.zip}")
+      
       click_link 'Create Order'
 
       new_order = Order.last

@@ -96,3 +96,39 @@ describe 'User clicks link to add a new address from their profile' do
     expect(page).to have_content("Nickname can't be blank, Name can't be blank, Address can't be blank, City can't be blank, State can't be blank, and Zip can't be blank")
   end
 end
+
+describe 'User adds new address from new order page' do
+  it 'Redirects back to the new order page' do
+    user = create(:user)
+    merchant = create(:merchant)
+    merchant.items << create(:item)
+    item = merchant.items.first
+    visit '/login'
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    within '#login-form' do
+      click_on 'Log In'
+    end
+
+    visit item_path(item)
+    click_link 'Add To Cart'
+
+    visit '/cart'
+    click_link 'Checkout'
+
+    click_link 'Add New Address'
+
+    fill_in 'Address nickname', with: 'Home'
+    fill_in 'Name', with: 'Curly'
+    fill_in 'Address', with: '2345 My Street'
+    fill_in 'City', with: 'Cool City'
+    select 'Colorado', from: 'State'
+    fill_in 'Zip', with: '80303'
+
+    click_on 'Create Address'
+
+    expect(current_path).to eq('/orders/new')
+  end
+end

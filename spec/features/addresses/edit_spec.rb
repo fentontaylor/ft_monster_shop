@@ -73,3 +73,52 @@ describe 'User clicks Edit Address link from their profile' do
     expect(page).to have_content('Edit This Address')
   end
 end
+
+describe 'User can edit address from new order page' do
+  it 'Redirects them to the neworder page' do
+    user = create(:user)
+    user.addresses << create(:address)
+    address = user.addresses.first
+    merchant = create(:merchant)
+    merchant.items << create(:item)
+    item = merchant.items.first
+
+    visit '/login'
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    within '#login-form' do
+      click_on 'Log In'
+    end
+
+    visit item_path(item)
+    click_link 'Add To Cart'
+
+    visit '/cart'
+    click_link 'Checkout'
+
+    within ".address-select" do
+      click_on address.nickname
+    end
+
+    click_link 'Edit Address'
+
+    fill_in 'Address', with: '2345 My Street'
+    fill_in 'City', with: 'Cool City'
+    select 'California', from: 'State'
+    fill_in 'Zip', with: '90505'
+
+    click_on 'Update Address'
+
+    expect(current_path).to eq('/orders/new')
+
+    within ".address-select" do
+      click_on address.nickname
+    end
+
+    expect(page).to have_content(address.name)
+    expect(page).to have_content('2345 My Street')
+    expect(page).to have_content('Cool City, CA 90505')
+  end
+end

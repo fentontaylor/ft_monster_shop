@@ -33,10 +33,11 @@
     </div>
   </div>
   <% if @selected %>
-    <section class="new-order-address" id="address-#{@selected.id}">
+    <section class="new-order-address" id="address-option-#{address.id}">
       <p><%= @selected.name %></p>
       <p><%= @selected.address %></p>
       <p><%= "#{@selected.city}, #{@selected.state} #{@selected.zip}" %></p>
+      <p align="right"><%= link_to 'Edit Address', user_address_edit_path(@user, @selected), class: 'reg-link' %></p>
     </section>
     <p align="center"><%= link_to "Create Order", "/orders/#{@selected.id}",  class: 'btn', id: 'green-btn', method: :post %></p>
   <% else %>
