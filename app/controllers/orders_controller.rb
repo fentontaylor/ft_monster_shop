@@ -52,9 +52,8 @@ class OrdersController <ApplicationController
     order = user.orders.create(user_info(user))
     create_item_orders(order)
     session.delete(:cart)
-    binding.pry
     redirect_to "/profile/orders"
-    flash[:success] = "Thank You For Your Order!"
+    flash[:success] = "Thankz for your business, dawg!"
   end
 
   def ship
@@ -69,7 +68,7 @@ class OrdersController <ApplicationController
 
   def user_info(user)
     info = Hash.new
-    address = user.addresses.find_by(nickname: params[:address])
+    address = user.addresses.find(params[:address_id])
     info[:name] = user.name
     info[:address] = address.address
     info[:city] = address.city

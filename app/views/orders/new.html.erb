@@ -26,7 +26,7 @@
 <% unless @addresses.empty? %>
   <div class="dropdown">
     <button class="btn" id="address-btn">Shipping Address</button>
-    <div class="dropdown-content">
+    <div class="address-select">
       <% @addresses.each do |address| %>
         <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
       <% end %>
@@ -38,7 +38,7 @@
       <p><%= @selected.address %></p>
       <p><%= "#{@selected.city}, #{@selected.state} #{@selected.zip}" %></p>
     </section>
-    <p align="center"><%= link_to "Create Order", "/orders/#{@selected.nickname}",  class: 'btn', id: 'green-btn', method: :post %></p>
+    <p align="center"><%= link_to "Create Order", "/orders/#{@selected.id}",  class: 'btn', id: 'green-btn', method: :post %></p>
   <% else %>
     <p>☝️ Please select an address ☝️</p>
   <% end %>
