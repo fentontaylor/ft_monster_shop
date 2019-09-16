@@ -1,6 +1,10 @@
+require 'rails_helper'
+
 describe("Order Creation") do
   describe "When I check out from my cart" do
     before :each do
+      User.destroy_all
+      @user = create(:user)
       @tire = create(:item, price: 10)
       @paper = create(:item, price: 5)
       @pencil = create(:item, price: 1)
