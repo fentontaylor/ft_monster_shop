@@ -62,6 +62,10 @@ class OrdersController <ApplicationController
     redirect_to "/admin"
   end
 
+  def shipping_options
+    @user = User.find(session[:user_id])
+  end
+
   private
 
   def user_info(user)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'user order show page' do
   before :each do
-    User.destroy_all
+
     @tire = create(:item, inventory: 10, price: 35)
     @paper = create(:item, inventory: 10, price: 40)
     @order = create(:order)
@@ -19,7 +19,7 @@ describe 'user order show page' do
       click_on 'Log In'
     end
   end
-  
+
   it "shows info on a single order" do
     visit '/profile/orders'
 

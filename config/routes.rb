@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:new, :create]
   patch '/orders/:id', to: 'orders#cancel', as: :order_cancel
   get '/orders/:order_id', to: 'orders#show', as: :order
+  get '/orders/new/shipping_options', to: 'orders#shipping_options', as: :shipping_options
   patch '/orders/:order_id/ship', to: 'orders#ship', as: :shipped_order
   get '/profile/orders/:order_id', to: 'orders#show'
   get '/profile/orders', to: 'orders#index'
@@ -62,6 +63,6 @@ Rails.application.routes.draw do
 
   resources :password_resets
   get 'password_resets/new'
-  
+
   match "*path", to: "welcome#catch_404", via: :all
 end

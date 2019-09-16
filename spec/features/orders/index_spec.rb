@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'User order index page' do
   before :each do
-    User.destroy_all
+
     @tire = create(:item, price: 100)
     @paper = create(:item, price: 20)
     @pencil = create(:item, price: 2)

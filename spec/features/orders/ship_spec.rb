@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'order ship' do
   it "an order that is shipped with have it's status changed" do
-    User.destroy_all
+
     order = create(:order, status: 'packaged')
     admin = create(:user, role: 4)
 

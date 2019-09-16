@@ -63,8 +63,8 @@ describe "New Order Page" do
       end
 
       expect(page).to have_content("Order Total: $142")
-      expect(page).to have_content('Select shipping address')
-      expect(page).to have_link('Create Order')
+
+      click_link 'Proceed To Shipping Options'
     end
   end
 end
