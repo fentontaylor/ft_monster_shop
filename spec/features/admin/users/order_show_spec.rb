@@ -22,9 +22,9 @@ describe 'admin user order show page' do
   it 'an admin can click an order id and see an admin only show page' do
     visit '/admin'
 
-    expect(page).to have_link(@order.id)
+    expect(page).to have_link("Order ##{@order.id}")
 
-    click_link @order.id
+    click_link "Order ##{@order.id}"
 
     expect(current_path).to eq("/admin/users/#{@user.id}/orders/#{@order.id}")
 
