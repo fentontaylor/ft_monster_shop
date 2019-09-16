@@ -336,6 +336,7 @@ ul{
 .new-order-address {
   margin-top: 1em;
   text-align: left;
+  padding-right: 1em;
 }
 
 .order-show-table {
