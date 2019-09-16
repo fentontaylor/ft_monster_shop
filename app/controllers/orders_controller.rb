@@ -52,6 +52,7 @@ class OrdersController <ApplicationController
     order = user.orders.create(user_info(user))
     create_item_orders(order)
     session.delete(:cart)
+    binding.pry
     redirect_to "/profile/orders"
     flash[:success] = "Thank You For Your Order!"
   end

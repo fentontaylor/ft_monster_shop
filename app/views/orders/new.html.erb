@@ -22,14 +22,16 @@
 <h3 align="center">Order Total: <%= number_to_currency(cart.total)%></h3>
 
 <center>
-<div class="dropdown">
-  <button class="btn" id="address-btn">Shipping Address</button>
-  <div class="dropdown-content">
-    <% @addresses.each do |address| %>
-      <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
-    <% end %>
+<p><%= link_to 'Add New Address', user_address_new_path(@user), class: 'btn-small' %></p>
+<% unless @addresses.empty? %>
+  <div class="dropdown">
+    <button class="btn" id="address-btn">Shipping Address</button>
+    <div class="dropdown-content">
+      <% @addresses.each do |address| %>
+        <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
+      <% end %>
+    </div>
   </div>
-</div>
   <% if @selected %>
     <section class="new-order-address" id="address-#{@selected.id}">
       <p><%= @selected.name %></p>
@@ -40,4 +42,5 @@
   <% else %>
     <p>☝️ Please select an address ☝️</p>
   <% end %>
+<% end %>
 </center>
