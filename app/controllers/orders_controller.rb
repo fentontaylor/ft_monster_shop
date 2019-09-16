@@ -68,7 +68,6 @@ class OrdersController <ApplicationController
 
   def user_info(user)
     info = Hash.new
-    # binding.pry
     address = user.addresses.find_by(nickname: params[:address])
     info[:name] = user.name
     info[:address] = address.address
