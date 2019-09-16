@@ -5,21 +5,32 @@
     <% unless @admin %>
       <%= link_to 'Edit Profile', '/profile/edit', class: 'btn-small' %>
       <%= link_to 'Change Password', '/profile/edit_password', class: 'btn-small' %>
-      <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
     <% end %>
+    <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
   <h3>My Addresses</h3>
   <% if @user.addresses.empty? %>
-    <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
+    <% if @admin %>
+      <p>No Addresses for this user</p>
+    <% else %>
+      <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
+    <% end %>
   <% else %>
-    <p><%= link_to 'New Address', user_address_new_path(@user), class: 'btn-small' %></p>
+    <% unless @admin %>
+      <p><%= link_to 'New Address', user_address_new_path(@user), class: 'btn-small' %></p>
+    <% end %>
     <% @user.addresses.each do |address| %>
       <section id="address-<%= address.id %>">
         <h4><%= address.nickname %></h4>
         <p><%= address.name %></p>
         <p><%= address.address %></p>
         <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
-        <p><%= link_to 'Edit Address', user_address_edit_path(@user, address) %></p>
-        <p><%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete %></p>
+        <% unless @admin %>
+          <p>
+            <%= link_to 'Edit Address', user_address_edit_path(@user, address), class: 'reg-link' %>
+            <span> | </span>
+            <%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete, class: 'reg-link' %>
+          </p>
+        <% end %>
       </section>
     <% end %>
   <% end %>

@@ -72,6 +72,15 @@ input[type=submit]:hover {
   color: #f2f2f2;
 }
 
+section[id^='address-'] {
+  background-image: linear-gradient(to right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  border-radius: 10px;
+  border: 1px solid var(--dark-teal);
+  margin-bottom: 1em;
+  padding-left: 1em;
+  width: 30%;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -314,6 +323,7 @@ ul{
 .reg-link:hover {
   color: purple;
   text-decoration: underline;
+  text-shadow: 0 0 5px #00ffff;
 }
 .sign-up {
   color: var(--light-text);
@@ -362,6 +372,7 @@ ul{
   table-layout: fixed;
   width: 60%;
 }
+
 
 #green-btn {
   background-color: #00b32d;

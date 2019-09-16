@@ -19,5 +19,9 @@
     </tr>
   <% end %>
 </table>
-<h3 align = "right">Total: <%= number_to_currency(cart.total)%></h3>
-<p align = "right"><%= link_to "Create Order", orders_path,  class: 'btn', id: 'green-btn', method: :post %></p>
+<h3 align="center">Order Total: <%= number_to_currency(cart.total)%></h3>
+<hr>
+<h3 align="center">Select shipping address</h3>
+
+<hr>
+<p align="center"><%= link_to "Create Order", orders_path,  class: 'btn', id: 'green-btn', method: :post %></p>

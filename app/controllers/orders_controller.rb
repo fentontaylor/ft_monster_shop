@@ -5,7 +5,7 @@ class OrdersController <ApplicationController
   end
 
   def new
-
+    @user = User.find(session[:user_id])
   end
 
   def cancel_item_orders(order)

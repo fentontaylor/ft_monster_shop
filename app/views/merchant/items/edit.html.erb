@@ -1,5 +1,5 @@
 <center>
-        <h1>Edit <%= @item.name %></h1>
+        <h1>Edit <%= link_to @item.name, item_path(@item), class: 'reg-link' %></h1>
         <%= form_for @item, :url => merchant_update_item_path(@item) do |f| %>
           <%= f.label :name %>
           <%= f.text_field :name %>
@@ -11,6 +11,6 @@
           <%= f.text_field :image %>
           <%= f.label :inventory %>
           <%= f.text_field :inventory %>
-          <%= f.submit 'Submit' %>
+          <%= f.submit %>
         <% end %>
     </center>

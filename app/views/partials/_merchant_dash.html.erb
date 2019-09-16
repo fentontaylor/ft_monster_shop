@@ -4,21 +4,25 @@
   <h3><%= "#{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %> </h3>
 
   <h1>Pending Orders:</h1>
-  <table class="merchant-orders-table">
-    <tr>
-      <th>Order ID</th>
-      <th>Placed On</th>
-      <th>Number of Items</th>
-      <th>Total Cost</th>
-    </tr>
-    <% @pending_orders.each do |order| %>
-      <tr id="order-<%=order.id%>-info">
-        <td><%= link_to "Order ##{order.id}", merchant_order_show_path(order), class: 'reg-link' %></td>
-        <td><%= (order.created_at).strftime("%D") %></td>
-        <td><%= order.my_items_count(@merchant.id) %></td>
-        <td><%= number_to_currency order.my_total(@merchant.id) %></td>
+  <% if @pending_orders.empty? %>
+    No orders yet
+  <% else %>
+    <table class="merchant-orders-table">
+      <tr>
+        <th>Order ID</th>
+        <th>Placed On</th>
+        <th>Number of Items</th>
+        <th>Total Cost</th>
       </tr>
-    <% end %>
-  </table>
+      <% @pending_orders.each do |order| %>
+        <tr id="order-<%=order.id%>-info">
+          <td><%= link_to "Order ##{order.id}", merchant_order_show_path(order), class: 'reg-link' %></td>
+          <td><%= (order.created_at).strftime("%D") %></td>
+          <td><%= order.my_items_count(@merchant.id) %></td>
+          <td><%= number_to_currency order.my_total(@merchant.id) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
   <p><%= link_to "#{@merchant.name} Items", "/merchant/items", class: 'reg-link', class: 'btn' %></p>
 </center>

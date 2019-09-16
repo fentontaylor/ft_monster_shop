@@ -1,4 +1,6 @@
-RSpec.describe("New Order Page") do
+require 'rails_helper'
+
+describe "New Order Page" do
   describe "When I check out from my cart" do
     before(:each) do
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -16,12 +18,14 @@ RSpec.describe("New Order Page") do
       visit "/items/#{@pencil.id}"
       click_on "Add To Cart"
     end
+
     it "I see all the information about my current cart" do
       visit "/cart"
 
       user = create(:user)
+      2.times { user.addresses << create(:address) }
 
-      click_on "log in"
+      visit '/login'
 
       fill_in 'Email', with: user.email
       fill_in 'Password', with: user.password
@@ -58,7 +62,9 @@ RSpec.describe("New Order Page") do
         expect(page).to have_content("$2")
       end
 
-      expect(page).to have_content("Total: $142")
+      expect(page).to have_content("Order Total: $142")
+      expect(page).to have_content('Select shipping address')
+      expect(page).to have_link('Create Order')
     end
   end
 end
