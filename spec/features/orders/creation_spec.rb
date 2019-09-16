@@ -1,4 +1,4 @@
-RSpec.describe("Order Creation") do
+describe("Order Creation") do
   describe "When I check out from my cart" do
     before :each do
       @tire = create(:item, price: 10)
