@@ -31,13 +31,13 @@ describe 'Admin clicks My Order on user profile' do
 
     click_link 'User Orders'
 
-    expect(current_path).to eq("/admin/users/#{user.id}/orders")
+    expect(current_path).to eq(admin_user_orders_path(user))
 
     expect(page).to have_css("#order-#{order_1.id}")
     expect(page).to have_css("#order-#{order_2.id}")
 
     click_link "Order ##{order_1.id}"
 
-    expect(current_path).to eq("/admin/users/#{user.id}/orders/#{order_1.id}")
+    expect(current_path).to eq(admin_user_order_path(user, order_1))
   end
 end

@@ -14,7 +14,7 @@
           <tr>
             <section id = "order-<%=order.id%>">
               <% if current_admin? %>
-                <td><%= link_to "Order ##{order.id}", "/admin/users/#{@user.id}/orders/#{order.id}", class: 'reg-link' %></td>
+                <td><%= link_to "Order ##{order.id}", admin_user_order_path(@user, order), class: 'reg-link' %></td>
               <% else %>
                 <td><%= link_to "Order ##{order.id}", "/profile/orders/#{order.id}", class: 'reg-link' %></td>
               <% end %>
