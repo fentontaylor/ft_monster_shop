@@ -5,8 +5,10 @@
     <% unless @admin %>
       <%= link_to 'Edit Profile', '/profile/edit', class: 'btn-small' %>
       <%= link_to 'Change Password', '/profile/edit_password', class: 'btn-small' %>
+      <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
+    <% else %>
+      <%= link_to 'User Orders', "/admin/users/#{@user.id}/orders", class: 'btn-small' %>
     <% end %>
-    <%= link_to 'My Orders', '/profile/orders', class: 'btn-small' %>
   <h3>My Addresses</h3>
   <% if @user.addresses.empty? %>
     <% if @admin %>
