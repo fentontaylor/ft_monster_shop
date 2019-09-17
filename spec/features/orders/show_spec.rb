@@ -7,8 +7,8 @@ describe 'user order show page' do
     @paper = create(:item, inventory: 10, price: 40)
     @order = create(:order)
     @order_2 = create(:order, status: 2)
-    @item_order_1 = @order.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
-    @item_order_2 = @order.item_orders.create!(item: @paper, price: @paper.price, quantity: 4)
+    @item_order_1 = @order.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
+    @item_order_2 = @order.item_orders.create(item: @paper, price: @paper.price, quantity: 4)
 
     visit '/login'
 
@@ -60,9 +60,9 @@ describe 'user order show page' do
 
     visit "/profile/orders/#{@order.id}"
 
-    expect(page).to have_button("Cancel Order")
+    expect(page).to have_link("Cancel Order")
 
-    click_button "Cancel Order"
+    click_link "Cancel Order"
 
     expect(current_path).to eq("/profile")
 
@@ -70,7 +70,7 @@ describe 'user order show page' do
 
     visit "/profile/orders/#{@order.id}"
 
-    within ".shipping-address" do
+    within "#order-status" do
       expect(page).to have_content("cancelled")
     end
 
@@ -86,7 +86,7 @@ describe 'user order show page' do
   it "An order that is beyond the pending stage cannot be cancelled" do
     visit "/orders/#{@order_2.id}"
 
-    expect(page).to_not have_button("Cancel Order")
+    expect(page).to_not have_link("Cancel Order")
   end
 
   it "admin can cancel an order" do

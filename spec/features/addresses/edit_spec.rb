@@ -101,7 +101,7 @@ describe 'User can edit address from new order page' do
     within ".address-select" do
       click_on address.nickname
     end
-
+    
     click_link 'Edit Address'
 
     fill_in 'Address', with: '2345 My Street'

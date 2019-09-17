@@ -1,17 +1,19 @@
 <center>
-  <%= form_for [@user, @address], url: path do |f| %>
-    <%= f.label :nickname, 'Address nickname' %>
-    <%= f.text_field :nickname, value: @address.nickname %>
+  <%= form_for resource, url: path do |f| %>
+    <% if show_nickname %>
+      <%= f.label :nickname, 'Address nickname' %>
+      <%= f.text_field :nickname, value: info.nickname %>
+    <% end %>
     <%= f.label :name %>
-    <%= f.text_field :name, value: @address.name %>
+    <%= f.text_field :name, value: info.name %>
     <%= f.label :address %>
-    <%= f.text_field :address, value: @address.address %>
+    <%= f.text_field :address, value: info.address %>
     <%= f.label :city %>
-    <%= f.text_field :city, value: @address.city %>
+    <%= f.text_field :city, value: info.city %>
     <%= f.label :state %>
-    <%= f.select :state, options_for_select(us_states, @address.state) %>
+    <%= f.select :state, options_for_select(us_states, info.state) %>
     <%= f.label :zip %>
-    <%= f.text_field :zip, value: @address.zip %>
+    <%= f.text_field :zip, value: info.zip %>
     <%= f.submit %>
   <% end %>
 </center>

@@ -21,27 +21,4 @@
 </table>
 <h3 align="center">Order Total: <%= number_to_currency(cart.total)%></h3>
 
-<center>
-<p><%= link_to 'Add New Address', user_address_new_path(@user), class: 'btn-small' %></p>
-<% unless @addresses.empty? %>
-  <div class="dropdown">
-    <button class="btn" id="address-btn">Shipping Address</button>
-    <div class="address-select">
-      <% @addresses.each do |address| %>
-        <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
-      <% end %>
-    </div>
-  </div>
-  <% if @selected %>
-    <section class="new-order-address" id="address-option-#{address.id}">
-      <p><%= @selected.name %></p>
-      <p><%= @selected.address %></p>
-      <p><%= "#{@selected.city}, #{@selected.state} #{@selected.zip}" %></p>
-      <p align="right"><%= link_to 'Edit Address', user_address_edit_path(@user, @selected), class: 'reg-link' %></p>
-    </section>
-    <p align="center"><%= link_to "Create Order", "/orders/#{@selected.id}",  class: 'btn', id: 'green-btn', method: :post %></p>
-  <% else %>
-    <p>☝️ Please select an address ☝️</p>
-  <% end %>
-<% end %>
-</center>
+<%= render partial: 'partials/address_select', locals: {submit: 'Create Order', method: :post} %>
