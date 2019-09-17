@@ -72,12 +72,14 @@ input[type=submit]:hover {
   color: #f2f2f2;
 }
 
-section[id^='address-'] {
+section[id^='address-'],
+.rainbow-display {
   background-image: linear-gradient(to right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
   border-radius: 10px;
   border: 1px solid var(--dark-teal);
   margin-bottom: 1em;
-  padding-left: 1em;
+  padding: 0 1em;
+  text-align: left;
   width: 30%;
 }
 

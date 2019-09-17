@@ -60,9 +60,9 @@ describe 'user order show page' do
 
     visit "/profile/orders/#{@order.id}"
 
-    expect(page).to have_button("Cancel Order")
+    expect(page).to have_link("Cancel Order")
 
-    click_button "Cancel Order"
+    click_link "Cancel Order"
 
     expect(current_path).to eq("/profile")
 
@@ -70,7 +70,7 @@ describe 'user order show page' do
 
     visit "/profile/orders/#{@order.id}"
 
-    within ".shipping-address" do
+    within "#order-status" do
       expect(page).to have_content("cancelled")
     end
 
@@ -86,7 +86,7 @@ describe 'user order show page' do
   it "An order that is beyond the pending stage cannot be cancelled" do
     visit "/orders/#{@order_2.id}"
 
-    expect(page).to_not have_button("Cancel Order")
+    expect(page).to_not have_link("Cancel Order")
   end
 
   it "admin can cancel an order" do

@@ -1,27 +1,5 @@
-<section class = "shipping-address">
-  <h1 align = "center">Shipping Info</h1>
-  <table>
-    <tr>
-      <th>Order id</th>
-      <th>Status</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-    </tr>
-    <tr>
-      <td><p><%= @order.id %> </p></td>
-      <td><p><%= @order.status %></p></td>
-      <td><p><%= @order.name %> </p></td>
-      <td><p><%= @order.address %> </p></td>
-      <td><p><%= @order.city %> </p></td>
-      <td><p><%= @order.state %> </p></td>
-      <td><p><%= @order.zip %> </p></td>
-    </tr>
-  </table>
-</section>
-<h1 align = "center">Order Info</h1>
+<h1 align="center">Order #<%= @order.id %> </h1>
+<h2 align="center" id="order-status">Status: <%= @order.status %></h2>
 <center>
   <table class = "order-show-table">
     <tr>
@@ -49,18 +27,29 @@
     </tr>
   <% end %>
 </table>
+  <section>
+    <h2>Order Summary</h2>
+    <section class="rainbow-display">
+      <p>Total Items: <%= @order.items_count %></p>
+      <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
+      <p>Date Placed: <%= @order.created_at.strftime('%D') %></p>
+      <p>Last Updated: <%= @order.updated_at.strftime('%D') %></p>
+    </section>
+  </section>
 
-<section id="grandtotal">
-  <p>Total Items: <%= @order.items_count %></p>
-  <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
-</section>
-<section id="datecreated">
-  <p>Date Placed: <%= @order.created_at.strftime('%D') %></p>
-  <p>Last Updated: <%= @order.updated_at.strftime('%D') %></p>
-</section>
+  <section class="shipping-address">
+    <h2>Shipping Info</h2>
+    <section class="rainbow-display">
+      <p><%= @order.name %></p>
+      <p><%= @order.address %></p>
+      <p><%= "#{@order.city}, #{@order.state} #{@order.zip}" %></p>
+      <p align="right"><%= link_to 'Change Address', '/profile', class: 'reg-link' %></p>
+    </section>
+  </section>
+
 <% if @order.pending? %>
   <section>
-    <%= button_to 'Cancel Order', order_cancel_path(@order), method: :patch %>
+    <%= link_to 'Cancel Order', order_cancel_path(@order), method: :patch, class: 'btn', id: 'red-btn' %>
   </section>
 <% end %>
 <% if current_admin? && @order.status == 'packaged' %>

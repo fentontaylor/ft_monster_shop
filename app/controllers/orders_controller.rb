@@ -1,5 +1,5 @@
 class OrdersController <ApplicationController
-  before_action :set_user, only: [:index, :new, :create]
+  before_action :set_user, only: [:index, :show, :new, :create]
   before_action :set_order, only: [:show, :cancel, :ship]
 
   def index
