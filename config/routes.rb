@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   post '/orders/:address_id', to: 'orders#create'
   patch '/orders/:order_id/cancel', to: 'orders#cancel', as: :order_cancel
   patch '/orders/:order_id/ship', to: 'orders#ship', as: :shipped_order
-  patch '/orders/:order_id/edit', to: 'orders#edit', as: :edit_order
+  get '/orders/:order_id/edit', to: 'orders#edit', as: :edit_order
+  patch '/orders/:order_id/update', to: 'orders#update', as: :update_order
   get '/profile/orders/:order_id', to: 'orders#show'
   get '/profile/orders', to: 'orders#index'
 

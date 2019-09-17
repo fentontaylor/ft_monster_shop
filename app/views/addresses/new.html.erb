@@ -1,2 +1,6 @@
 <h2 style="text-align:center;">Add a New Address</h2>
-<%= render partial: 'partials/address', locals: { path: user_address_create_path(@user), show_nickname: true } %>
+<%= render partial: 'partials/address',
+  locals: { resource: [@user, @address],
+            path: user_address_create_path(@user),
+            info: @address,
+            show_nickname: true } %>

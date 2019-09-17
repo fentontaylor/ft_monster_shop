@@ -1,6 +1,6 @@
 class OrdersController <ApplicationController
   before_action :set_user, only: [:index, :show, :new, :create]
-  before_action :set_order, only: [:show, :cancel, :ship]
+  before_action :set_order, only: [:show, :edit, :update, :cancel, :ship]
 
   def index
   end
@@ -22,9 +22,18 @@ class OrdersController <ApplicationController
   end
 
   def edit
-
   end
-  
+
+  def update
+    if @order.update(order_params)
+      flash[:success] = "You updated yo' shipping deets"
+      redirect_to order_path(@order)
+    else
+      flash[:error] = @order.errors.full_messages.to_sentence
+      redirect_to edit_order_path(@order)
+    end
+  end
+
   def create_item_orders(order)
     cart.items.each do |item,quantity|
       order.item_orders.create({
@@ -83,5 +92,9 @@ class OrdersController <ApplicationController
     info[:state] = address.state
     info[:zip] = address.zip
     info
+  end
+
+  def order_params
+    params.require(:order).permit(:name, :address, :city, :state, :zip)
   end
 end

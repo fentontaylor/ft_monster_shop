@@ -23,13 +23,12 @@ describe 'User clicks Change Address from pending order show page' do
     click_link 'Edit Shipping Details'
 
     expect(current_path).to eq(edit_order_path(order))
-    save_and_open_page
     fill_in 'Address', with: '123 Updated Address'
     fill_in 'City', with: 'Edit City'
     select 'Hawaii', from: 'State'
     fill_in 'Zip', with: '99999'
 
-    click_on 'Update Address'
+    click_on 'Update Order'
 
     expect(current_path).to eq(order_path(order.id))
 
