@@ -22,6 +22,9 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    unless @order.pending?
+      render file: 'public/404'
+    end
   end
 
   def update
