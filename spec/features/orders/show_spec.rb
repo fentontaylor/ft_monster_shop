@@ -7,8 +7,8 @@ describe 'user order show page' do
     @paper = create(:item, inventory: 10, price: 40)
     @order = create(:order)
     @order_2 = create(:order, status: 2)
-    @item_order_1 = @order.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
-    @item_order_2 = @order.item_orders.create!(item: @paper, price: @paper.price, quantity: 4)
+    @item_order_1 = @order.item_orders.create(item: @tire, price: @tire.price, quantity: 2)
+    @item_order_2 = @order.item_orders.create(item: @paper, price: @paper.price, quantity: 4)
 
     visit '/login'
 

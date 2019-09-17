@@ -21,6 +21,10 @@ class OrdersController <ApplicationController
     flash[:success] = "Thankz for your business, dawg!"
   end
 
+  def edit
+
+  end
+  
   def create_item_orders(order)
     cart.items.each do |item,quantity|
       order.item_orders.create({

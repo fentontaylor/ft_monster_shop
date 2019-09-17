@@ -14,7 +14,7 @@
       <p><%= @selected.name %></p>
       <p><%= @selected.address %></p>
       <p><%= "#{@selected.city}, #{@selected.state} #{@selected.zip}" %></p>
-      <p align="right"><%= link_to 'Edit Address', user_address_edit_path(@user, @selected), class: 'reg-link' %></p>
+      <p align="right"><%= link_to 'Change Address', user_address_edit_path(@user, @selected), class: 'reg-link' %></p>
     </section>
     <p align="center"><%= link_to submit, "/orders/#{@selected.id}",  class: 'btn', id: 'green-btn', method: method %></p>
   <% else %>

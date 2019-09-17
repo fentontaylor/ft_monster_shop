@@ -27,25 +27,28 @@
     </tr>
   <% end %>
 </table>
-  <section>
-    <h2>Order Summary</h2>
-    <section class="rainbow-display">
-      <p>Total Items: <%= @order.items_count %></p>
-      <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
-      <p>Date Placed: <%= @order.created_at.strftime('%D') %></p>
-      <p>Last Updated: <%= @order.updated_at.strftime('%D') %></p>
-    </section>
-  </section>
 
-  <section class="shipping-address">
-    <h2>Shipping Info</h2>
-    <section class="rainbow-display">
-      <p><%= @order.name %></p>
-      <p><%= @order.address %></p>
-      <p><%= "#{@order.city}, #{@order.state} #{@order.zip}" %></p>
-      <p align="right"><%= link_to 'Change Address', '/profile', class: 'reg-link' %></p>
-    </section>
+<section>
+  <h2>Order Summary</h2>
+  <section class="rainbow-display">
+    <p>Total Items: <%= @order.items_count %></p>
+    <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
+    <p>Date Placed: <%= @order.created_at.strftime('%D') %></p>
+    <p>Last Updated: <%= @order.updated_at.strftime('%D') %></p>
   </section>
+</section>
+
+<section class="shipping-address">
+  <h2>Shipping Info</h2>
+  <section class="rainbow-display">
+    <p><%= @order.name %></p>
+    <p><%= @order.address %></p>
+    <p><%= "#{@order.city}, #{@order.state} #{@order.zip}" %></p>
+    <% if @order.pending? %>
+      <p align="right"><%= link_to 'Edit Shipping Details', edit_order_path(@order), class: 'reg-link' %></p>
+    <% end %>
+  </section>
+</section>
 
 <% if @order.pending? %>
   <section>
