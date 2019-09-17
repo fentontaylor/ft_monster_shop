@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :visitor_redirect
   before_action :set_item, only: [:new, :create, :edit]
 
   def new
