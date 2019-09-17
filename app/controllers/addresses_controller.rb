@@ -23,8 +23,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-    @address.update(address_params)
-    if @address.save
+    if @address.update(address_params)
       flash[:success] = "#{@address.nickname} address updated"
       redirect_to session.delete(:return_to)
     else

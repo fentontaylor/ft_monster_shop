@@ -36,3 +36,5 @@
     </section>
   <% end %>
 </table>
+<% path = current_admin? ? "/admin/merchants/#{@merchant.id}" : merchant_dash_path %>
+<h4 align="center"><%= link_to 'Back to Merchant Dashboard', path, class: 'btn' %></h4>

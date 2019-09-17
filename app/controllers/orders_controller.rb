@@ -1,4 +1,4 @@
-class OrdersController <ApplicationController
+class OrdersController < ApplicationController
   before_action :set_user, only: [:index, :show, :new, :create]
   before_action :set_order, only: [:show, :edit, :update, :cancel, :ship]
 
@@ -22,6 +22,9 @@ class OrdersController <ApplicationController
   end
 
   def edit
+    unless @order.pending?
+      render file: 'public/404'
+    end
   end
 
   def update
@@ -80,7 +83,11 @@ class OrdersController <ApplicationController
   end
 
   def set_user
-    @user = User.find(session[:user_id])
+    unless current_admin?
+      @user = User.find(session[:user_id])
+    else
+      @user = User.find(params[:user_id])
+    end
   end
 
   def user_info(user)

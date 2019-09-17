@@ -50,8 +50,17 @@ describe 'User clicks Change Address from pending order show page' do
     fill_in 'Zip', with: nil
 
     click_on 'Update Order'
-    
+
     expect(current_path).to eq(edit_order_path(@order))
     expect(page).to have_content("Name can't be blank, Address can't be blank, City can't be blank, State can't be blank, and Zip can't be blank")
+  end
+
+  it 'User cannot manually visit edit path if order is not pending' do
+    packaged_order = create(:order, status: 1)
+    @user.orders << packaged_order
+
+    visit edit_order_path(packaged_order)
+
+    expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 end

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: 'welcome#home'
-  get '/', to: 'welcome#home'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#login'
   get '/logout', to: 'sessions#logout'
@@ -60,7 +59,8 @@ Rails.application.routes.draw do
   get '/admin/users', to: 'admin/users#index'
   get '/admin/users/:id', to: 'users#show'
   get '/admin/merchants/:id', to: 'admin/merchants#index'
-  get '/admin/users/:user_id/orders/:order_id', to: 'orders#show'
+  get '/admin/users/:user_id/orders', to: 'orders#index', as: :admin_user_orders
+  get '/admin/users/:user_id/orders/:order_id', to: 'orders#show', as: :admin_user_order
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
 
   resources :password_resets

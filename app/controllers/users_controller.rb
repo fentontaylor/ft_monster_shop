@@ -1,4 +1,5 @@
-class UsersController <ApplicationController
+class UsersController < ApplicationController
+  before_action :set_user, only: [:edit, :update, :update_password]
   def new
     @user = User.new
   end
@@ -16,20 +17,18 @@ class UsersController <ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: session[:user_id])
   end
 
   def update
-    user = User.find(session[:user_id])
-    if user.update(profile_params)
+    if @user.update(profile_params)
       flash[:success] = 'Profile updated'
       redirect_to '/profile'
     else
-      flash[:error] = user.errors.full_messages.uniq.to_sentence
+      flash[:error] = @user.errors.full_messages.uniq.to_sentence
       redirect_to '/profile/edit'
     end
   end
-  
+
   def show
     unless session[:user_id]
       render file: "/public/404"
@@ -47,11 +46,10 @@ class UsersController <ApplicationController
   end
 
   def update_password
-    user = User.find(session[:user_id])
-    if user.authenticate(old_password)
+    if @user.authenticate(old_password)
       if new_passwords_match?
-        user.password = new_password
-        user.save
+        @user.password = new_password
+        @user.save
         flash[:success] = 'You got a fresh new password, dawg!'
         redirect_to '/profile'
       else
@@ -66,6 +64,10 @@ class UsersController <ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(session[:user_id])
+  end
 
   def update_password_params
     params.require(:update_password).permit(:old_password, :new_password, :new_password_confirmation)

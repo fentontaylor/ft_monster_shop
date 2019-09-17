@@ -1,5 +1,6 @@
 class MerchantsController <ApplicationController
   before_action :valid_merchant, only: [:show]
+  before_action :set_merchant, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_admin? == false
@@ -10,7 +11,6 @@ class MerchantsController <ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:id])
     if current_merchant?
       @works_here = @merchant.works_here?(current_user.merchant.id)
     end
@@ -30,13 +30,11 @@ class MerchantsController <ApplicationController
   end
 
   def edit
-    @merchant = Merchant.find(params[:id])
     user = User.find(session[:user_id])
     render file: "/public/404" unless current_merchant_admin? && @merchant.works_here?(user.merchant.id)
   end
 
   def update
-    @merchant = Merchant.find(params[:id])
     @merchant.update(merchant_params)
     if @merchant.save
       redirect_to "/merchants/#{@merchant.id}"
@@ -47,12 +45,15 @@ class MerchantsController <ApplicationController
   end
 
   def destroy
-    Item.delete(Item.where(merchant_id: params[:id]))
-    Merchant.destroy(params[:id])
+    @merchant.destroy
     redirect_to '/merchants'
   end
 
   private
+
+  def set_merchant
+    @merchant = Merchant.find(params[:id])
+  end
 
   def merchant_params
     params.permit(:name,:address,:city,:state,:zip)

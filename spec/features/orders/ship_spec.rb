@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'order ship' do
-  it "an order that is shipped with have it's status changed" do
-
-    order = create(:order, status: 'packaged')
+  it "an order that is shipped will have it's status changed" do
+    user = create(:user)
+    order = create(:order, user: user, status: 'packaged')
     admin = create(:user, role: 4)
 
     visit login_path
@@ -15,7 +15,7 @@ describe 'order ship' do
       click_on 'Log In'
     end
 
-    visit order_path(order)
+    visit admin_user_order_path(user, order)
 
     click_link 'Ship Order'
 
