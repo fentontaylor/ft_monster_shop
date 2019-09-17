@@ -32,8 +32,8 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
-    session[:cart] = nil
+    session.delete(:user_id)
+    session.delete(:cart)
     cookies.delete(:auth_token)
     flash[:success] = "L8r, yo"
     redirect_to "/"
