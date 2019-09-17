@@ -7,7 +7,9 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @item.reviews.create(review_params)
+    full_params = review_params.to_h
+    full_params[:user_id] = session[:user_id]
+    @review = @item.reviews.create(full_params)
     if @review.save
       flash[:success] = "Thanks for ur opinion, dawg"
       redirect_to item_path(@item)
