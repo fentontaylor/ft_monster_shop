@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start do
-  add_filter "spec/mailers/user_mailer_spec.rb"
+  add_group "Models", "app/models"
+  add_filter 'spec/'
   add_filter "app/controllers/password_resets_controller.rb"
   add_filter "app/controllers/application_controller.rb"
 end

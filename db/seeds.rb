@@ -44,16 +44,16 @@ bath_time = larrys_bath_house.items.create(name: "Bath Time", description: "So f
 
 #Users
 bob = User.create(name: 'Bob', email: 'bob@email.com', password: 'bob', password_confirmation: 'bob', role: 1)
-bob.addresses << Address.create(nickname: 'Home', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
+bob.addresses.create(nickname: 'Home', name: 'Bob', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
 
 joe = dog_shop.users.create(name: 'Joe', email: 'joe@email.com', password: 'joe', password_confirmation: 'joe', role: 2)
-joe.addresses << Address.create(nickname: 'Home', address: '1234 B Blvd', city: 'Los Angeles', state: 'CA', zip: 90210)
+joe.addresses.create(nickname: 'Home', name: 'Joe', address: '1234 B Blvd', city: 'Los Angeles', state: 'CA', zip: 90210)
 
 moe = dog_shop.users.create(name: 'Moe', email: 'moe@email.com', password: 'moe', password_confirmation: 'moe', role: 2)
-moe.addresses << Address.create(nickname: 'Home', address: '12 C Blvd', city: 'Los Angeles', state: 'CA', zip: 90210)
+moe.addresses.create(nickname: 'Home', name: 'Moe', address: '12 C Blvd', city: 'Los Angeles', state: 'CA', zip: 90210)
 
 sue = dog_shop.users.create(name: 'Sue', email: 'sue@email.com', password: 'sue', password_confirmation: 'sue', role: 3)
-sue.addresses << Address.create(nickname: 'Home', address: '12345 C St', city: 'Los Angeles', state: 'CA', zip: 90210)
+sue.addresses.create(nickname: 'Home', name: 'Sue', address: '12345 C St', city: 'Los Angeles', state: 'CA', zip: 90210)
 
 larry = larrys_bath_house.users.create(name: 'Larrold McFatty', email: 'larry@email.com', password: 'larry', password_confirmation: 'larry', role: 3)
 # address: '12345 Porko St', city: 'Pugfield', state: 'CO', zip: 80216
@@ -65,19 +65,19 @@ admin = User.create(name: 'admin', email: 'admin@email.com', password: 'admin', 
 
 # #orders
 evette = User.create(name: 'Evette McEvette', email: 'evette@email.com', password: 'bob', password_confirmation: 'bob', role: 1)
-evette.addresses.create(nickname: 'Home', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
+evette.addresses.create(nickname: 'Home', name: 'Evette McEvette', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
 order_1 = evette.orders.create(name: "Evette McEvette", address: "123 Evette Street", city: "Denver", state: "CO", zip: "12345")
 io1 = ItemOrder.create(item: pull_toy, order: order_1, price: pull_toy.price, quantity: 5)
 io2 = ItemOrder.create(item: dog_bone, order: order_1, price: dog_bone.price, quantity: 2)
 
 tylor = User.create(name: 'Tylor McTylor', email: 'tylor@email.com', password: 'bob', password_confirmation: 'bob', role: 1)
-tylor.addresses.create(nickname: 'Home', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
+tylor.addresses.create(nickname: 'Home', name: 'Tylor McTylor', address: '123 A Ave', city: 'Los Angeles', state: 'CA', zip: 90210)
 order_2 = evette.orders.create(name: "Evette McEvette", address: "123 Evette Street", city: "Denver", state: "CO", zip: "12345")
 io3 = ItemOrder.create(item: cut_style, order: order_2, price: cut_style.price, quantity: 1)
 io4 = ItemOrder.create(item: pug_lyfe, order: order_2, price: pug_lyfe.price, quantity: 2)
 
 fenton = User.create(name: 'Fenton McFenton', email: 'fenty@email.com', password: 'bob', password_confirmation: 'bob', role: 1)
-order_3 = fenton.orders.create(name: "Fenton McFenton", address: "123 Fenton Street", city: "Denver", state: "CO", zip: "12345")
+order_3 = fenton.orders.create(name: "Fenton McFenton", name: 'Fenton McFenton', address: "123 Fenton Street", city: "Denver", state: "CO", zip: "12345")
 io5 = ItemOrder.create(item: stache, order: order_3, price: stache.price, quantity: 1)
 io6 = ItemOrder.create(item: cut, order: order_3, price: cut.price, quantity: 6)
 
