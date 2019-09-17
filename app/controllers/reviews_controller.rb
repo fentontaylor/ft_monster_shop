@@ -1,10 +1,11 @@
 class ReviewsController < ApplicationController
+  before_action :set_item, only: [:new, :create, :edit]
+
   def new
-    @item = Item.find(params[:item_id])
+    @review = @item.reviews.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @review = @item.reviews.create(review_params)
     if @review.save
       flash[:success] = "Thanks for ur opinion, dawg"
@@ -34,7 +35,11 @@ class ReviewsController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def review_params
-    params.permit(:title,:content,:rating)
+    params.require(:review).permit(:title,:content,:rating)
   end
 end

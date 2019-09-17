@@ -9,10 +9,8 @@ Rails.application.routes.draw do
   end
 
   resources :items, except: [:create, :new] do
-    resources :reviews, only: [:new, :create]
+    resources :reviews, except: [:index, :show]
   end
-
-  resources :reviews, only: [:edit, :update, :destroy]
 
   post '/cart/:item_id', to: 'cart#add_item'
   get '/cart', to: 'cart#show'

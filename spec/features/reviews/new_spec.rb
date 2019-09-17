@@ -36,12 +36,12 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :content, with: content
-        fill_in :rating, with: rating
+        fill_in 'Title', with: title
+        fill_in 'Content', with: content
+        fill_in 'Rating', with: rating
 
         click_button "Create Review"
-
+        
         last_review = Review.last
         expect(current_path).to eq("/items/#{@chain.id}")
         expect(last_review.title).to eq(title)
@@ -77,21 +77,21 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :content, with: content
-        fill_in :rating, with: 0
+        fill_in 'Title', with: title
+        fill_in 'Content', with: content
+        fill_in 'Rating', with: 0
 
         click_on "Create Review"
 
         expect(page).to have_content("Rating must be greater than or equal to 1")
         expect(page).to have_button "Create Review"
 
-        fill_in :title, with: title
-        fill_in :content, with: content
-        fill_in :rating, with: 6
+        fill_in 'Title', with: title
+        fill_in 'Content', with: content
+        fill_in 'Rating', with: 6
 
         click_on "Create Review"
-        
+
         expect(page).to have_content("Rating must be less than or equal to 5")
         expect(page).to have_button "Create Review"
       end
