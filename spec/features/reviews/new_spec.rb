@@ -4,7 +4,17 @@ RSpec.describe 'review creation', type: :feature do
   before(:each) do
     @bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
     @chain = @bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
+    @user = create(:user)
+
+    visit '/login'
+
+    within "#login-form" do
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
+      click_on 'Log In'
+    end
   end
+
   describe "when I visit the item show page" do
     it 'I see a link to add a review for that item' do
       visit "items/#{@chain.id}"
@@ -15,6 +25,7 @@ RSpec.describe 'review creation', type: :feature do
 
       expect(current_path).to eq("/items/#{@chain.id}/reviews/new")
     end
+
     describe "and click on a link to add a review" do
       it "I can create a new review by following the link" do
         title = "Thanks Brian's Bike Shop!"
@@ -36,6 +47,7 @@ RSpec.describe 'review creation', type: :feature do
         expect(last_review.title).to eq(title)
         expect(last_review.content).to eq(content)
         expect(last_review.rating).to eq(rating)
+
         within "#review-#{last_review.id}" do
           expect(page).to have_content(title)
           expect(page).to have_content(content)
@@ -51,18 +63,14 @@ RSpec.describe 'review creation', type: :feature do
 
         click_on "Add Review"
 
-        fill_in :title, with: title
-        fill_in :rating, with: rating
-
         click_on "Create Review"
 
-        expect(page).to have_content("Please fill in all fields in order to create a review.")
-        expect(current_path).to eq("/items/#{@chain.id}/reviews/new")
+        expect(page).to have_content("Title can't be blank, Content can't be blank, and Rating is not a number")
+        expect(page).to have_content("Create Review for #{@chain.name}")
       end
 
       it 'I get an error if my rating is not between 1 and 5' do
         title = "Thanks Brian's Bike Shop!"
-        rating = 6
         content = "SO FUN SO GREAT"
 
         visit "/items/#{@chain.id}"
@@ -71,13 +79,33 @@ RSpec.describe 'review creation', type: :feature do
 
         fill_in :title, with: title
         fill_in :content, with: content
-        fill_in :rating, with: rating
+        fill_in :rating, with: 0
 
         click_on "Create Review"
 
-        expect(page).to have_content("Rating must be between 1 and 5")
+        expect(page).to have_content("Rating must be greater than or equal to 1")
+        expect(page).to have_button "Create Review"
+
+        fill_in :title, with: title
+        fill_in :content, with: content
+        fill_in :rating, with: 6
+
+        click_on "Create Review"
+        
+        expect(page).to have_content("Rating must be less than or equal to 5")
         expect(page).to have_button "Create Review"
       end
     end
+  end
+end
+
+describe 'Unregistered Visitor' do
+  it 'Cannot create reviews' do
+    merchant = create(:merchant)
+    item = create(:item)
+    merchant.items << item
+    visit "items/#{item.id}"
+
+    expect(page).to_not have_link("Add Review")
   end
 end

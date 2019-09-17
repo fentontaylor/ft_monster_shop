@@ -1,4 +1,4 @@
-<h1 align= "center">Create Review for <%= link_to @item.name, "/items/#{@item.id}" %></h1>
+<h1 align= "center">Create Review for <%= link_to @item.name, "/items/#{@item.id}", class: 'reg-link' %></h1>
 <center>
   <%= form_tag "/items/#{@item.id}/reviews", method: :post do |f| %>
 

@@ -4,20 +4,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    if field_empty?
-      item = Item.find(params[:item_id])
-      flash[:error] = "Please fill in all fields in order to create a review."
-      redirect_to "/items/#{item.id}/reviews/new"
+    @item = Item.find(params[:item_id])
+    @review = @item.reviews.create(review_params)
+    if @review.save
+      flash[:success] = "Thanks for ur opinion, dawg"
+      redirect_to item_path(@item)
     else
-      @item = Item.find(params[:item_id])
-      review = @item.reviews.create(review_params)
-      if review.save
-        flash[:success] = "Review successfully created"
-        redirect_to "/items/#{@item.id}"
-      else
-        flash[:error] = "Rating must be between 1 and 5"
-        render :new
-      end
+      flash[:error] = @review.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -42,10 +36,5 @@ class ReviewsController < ApplicationController
 
   def review_params
     params.permit(:title,:content,:rating)
-  end
-
-  def field_empty?
-    params = review_params
-    params[:title].empty? || params[:content].empty? || params[:rating].empty?
   end
 end

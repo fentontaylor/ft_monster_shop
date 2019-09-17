@@ -18,7 +18,9 @@
         <p style= "color:red">Inactive</p>
       <% end %>
       <p>
-        <%= link_to "Add Review", "/items/#{@item.id}/reviews/new", class: 'btn-small' %>
+        <% if current_user %>
+          <%= link_to "Add Review", "/items/#{@item.id}/reviews/new", class: 'btn-small' %>
+        <% end %>
         <% if (current_merchant? && current_user.works_here?(@item.merchant.id)) || current_admin? %>
           <%= link_to "Edit Item", merchant_edit_item_path(@item), class: 'btn-small' %>
           <%= link_to "Delete Item", merchant_delete_item_path(@item), class: 'btn-small', id: 'red-btn', method: :delete if @item.no_orders?%>
