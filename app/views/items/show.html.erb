@@ -1,4 +1,4 @@
-  <h1 class="page-title"><%= link_to @item.name, "/items/#{@item.id}", class: 'reg-link' %></h1>
+<h1 class="page-title"><%= link_to @item.name, "/items/#{@item.id}", class: 'reg-link' %></h1>
 <p align="center">Sold by: <%=link_to @item.merchant.name, "/merchants/#{@item.merchant.id}", class: 'reg-link' %> </p>
 <section align = "center" id = "average-rating">
   <p>Average Rating: <%= @item.reviews.empty? ? 'No reviews yet' : @item.average_review.round(2) %></p>
@@ -18,7 +18,9 @@
         <p style= "color:red">Inactive</p>
       <% end %>
       <p>
-        <%= link_to "Add Review", "/items/#{@item.id}/reviews/new", class: 'btn-small' %>
+        <% if current_user %>
+          <%= link_to "Add Review", "/items/#{@item.id}/reviews/new", class: 'btn-small' %>
+        <% end %>
         <% if (current_merchant? && current_user.works_here?(@item.merchant.id)) || current_admin? %>
           <%= link_to "Edit Item", merchant_edit_item_path(@item), class: 'btn-small' %>
           <%= link_to "Delete Item", merchant_delete_item_path(@item), class: 'btn-small', id: 'red-btn', method: :delete if @item.no_orders?%>
@@ -59,9 +61,9 @@
             <p class="ir-body-1">
               <span>Rating: <%= review.rating %>/5</span>
               <span>
-                <%= link_to "Edit", "/reviews/#{review.id}/edit", class: 'reg-link' %>
+                <%= link_to "Edit", edit_item_review_path(@item, review), class: 'reg-link' %>
                 <span> | </span>
-                <%= link_to "Delete", "/reviews/#{review.id}", class: 'reg-link', method: :delete %>
+                <%= link_to "Delete", item_review_path(@item, review), class: 'reg-link', method: :delete %>
               </span>
             </p>
             <p class="ir-content"><%= review.content %></p>
