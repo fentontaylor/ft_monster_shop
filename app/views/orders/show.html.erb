@@ -45,7 +45,11 @@
     <p><%= @order.address %></p>
     <p><%= "#{@order.city}, #{@order.state} #{@order.zip}" %></p>
     <% if @order.pending? %>
-      <p align="right"><%= link_to 'Edit Shipping Details', edit_order_path(@order), class: 'reg-link' %></p>
+      <% if current_admin? %>
+        <p align="right"><%= link_to 'Edit Shipping Details', admin_edit_user_order_path(@order), class: 'reg-link' %></p>
+      <% else %>
+        <p align="right"><%= link_to 'Edit Shipping Details', edit_order_path(@order), class: 'reg-link' %></p>
+      <% end %>
     <% end %>
   </section>
 </section>

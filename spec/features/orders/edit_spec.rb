@@ -64,7 +64,7 @@ describe 'User clicks Change Address from pending order show page' do
     expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 
-  it 'User cannot manually visit edit path if order does not belong to them' do
+  it 'User cannot manually visit edit path if order does not belong to them, unless they are admin' do
     @user_2 = create(:user)
     @address_2 = create(:address)
     @user_2.addresses << @address_2
@@ -72,8 +72,30 @@ describe 'User clicks Change Address from pending order show page' do
     @order_2 = @user_2.orders.create(name: @user_2.name, address: @address_2.address, city: @address_2.city, state: @address_2.state, zip: @address_2.zip)
     @item_order_2 = @order_2.item_orders.create(item: @item_2, price: @item_2.price, quantity: 1)
 
-    visit order_path(@order_2)
+    visit edit_order_path(@order_2)
 
-    expect(page).to have_content("The page you were looking for doesn't exist.")
+    expect(page).to have_content("Error 403: Forbidden")
+
+    click_link 'Log Out'
+
+    admin = create(:user, role: 4)
+
+    visit '/login'
+
+    within "#login-form" do
+      fill_in 'Email', with: admin.email
+      fill_in 'Password', with: admin.password
+      click_on 'Log In'
+    end
+
+    visit edit_order_path(@order)
+
+    expect(page).to_not have_content("Error 403: Forbidden")
+    expect(page).to have_button('Update Order')
+
+    visit edit_order_path(@order_2)
+
+    expect(page).to_not have_content("Error 403: Forbidden")
+    expect(page).to have_button('Update Order')
   end
 end

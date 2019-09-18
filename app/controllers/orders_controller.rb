@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :set_user, only: [:index, :show, :new, :create]
+  before_action :set_user, only: [:index, :show, :new, :create, :edit, :cancel]
   before_action :set_order, only: [:show, :edit, :update, :cancel, :ship]
+  before_action :authorized_to_change?, only: [:edit, :update, :cancel]
 
   def index
   end
@@ -78,6 +79,12 @@ class OrdersController < ApplicationController
 
   private
 
+  def authorized_to_change?
+    unless @order.placed_by?(current_user) || current_admin?
+      render file: 'public/403', status: 403
+    end
+  end
+
   def set_order
     @order = Order.find(params[:order_id])
   end
@@ -86,7 +93,7 @@ class OrdersController < ApplicationController
     unless current_admin?
       @user = User.find(session[:user_id])
     else
-      @user = User.find(params[:user_id])
+      @user = User.find_by_id(params[:user_id])
     end
   end
 
