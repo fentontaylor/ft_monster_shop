@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = Item.find_by(id: params[:id])
+    render file: 'public/404', status: 404 unless @item
   end
 end

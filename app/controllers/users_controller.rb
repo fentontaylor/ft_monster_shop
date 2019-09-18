@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def show
     unless session[:user_id]
-      render file: "/public/404"
+      render file: "/public/404", status: 404
     else
       if params[:id] && current_admin?
         @user = User.find(params[:id])

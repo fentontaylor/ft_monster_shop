@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :role, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
+  has_many :reviews
   has_many :orders
   has_many :addresses, dependent: :destroy
   belongs_to :merchant, optional: true

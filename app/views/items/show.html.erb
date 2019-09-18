@@ -60,11 +60,13 @@
           <section class="ir-section">
             <p class="ir-body-1">
               <span>Rating: <%= review.rating %>/5</span>
+              <% if current_user && review.written_by?(current_user) %>
               <span>
                 <%= link_to "Edit", edit_item_review_path(@item, review), class: 'reg-link' %>
                 <span> | </span>
                 <%= link_to "Delete", item_review_path(@item, review), class: 'reg-link', method: :delete %>
               </span>
+              <% end %>
             </p>
             <p class="ir-content"><%= review.content %></p>
           </section>

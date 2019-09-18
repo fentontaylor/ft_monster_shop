@@ -47,7 +47,7 @@ class Merchant::ItemsController < Merchant::BaseController
     flash[:success] = "#{@item.name} has been deleted"
     redirect_to "/merchant/items"
   end
-  
+
   def fulfill_item
     order = Order.find(params[:order_id])
     item_order = ItemOrder.find_by(order_id: order.id, item_id: params[:item_id])
@@ -76,6 +76,6 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def require_merchant
-    render file: "/public/404" unless current_merchant? || current_admin?
+    render file: "/public/404", status: 404 unless current_merchant? || current_admin?
   end
 end

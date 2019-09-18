@@ -23,13 +23,12 @@ class ApplicationController < ActionController::Base
     current_user && current_user.merchant_admin?
   end
 
-  def current_visitor?
-    !(current_merchant? || current_admin? || current_user)
-    binding.pry
+  def visitor_redirect
+    render file: 'public/404', status: 404 unless current_user
   end
 
   rescue_from ActionController::RoutingError do |exception|
     logger.error 'Routing error occurred'
-    render file: 'public/404'
+    render file: 'public/404', status: 404
   end
 end
