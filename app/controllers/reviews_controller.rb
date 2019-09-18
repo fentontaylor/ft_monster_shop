@@ -44,7 +44,9 @@ class ReviewsController < ApplicationController
 
   def check_author
     user = User.find(session[:user_id])
-    render file: 'public/403', status: 403 unless @review.written_by?(user)
+    unless @review.written_by?(user) || current_admin?
+      render file: 'public/403', status: 403
+    end
   end
 
   def set_review
