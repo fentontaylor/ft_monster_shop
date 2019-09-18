@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
 
   def new
     @addresses = @user.addresses
-    @selected = Address.find_by(nickname: params[:address])
+    @selected = Address.find_by(id: params[:address])
   end
 
   def create

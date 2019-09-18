@@ -5,7 +5,7 @@
     <button class="btn" id="address-btn">Shipping Address</button>
     <div class="address-select">
       <% @addresses.each do |address| %>
-        <%= link_to "#{address.nickname}", "?address=#{address.nickname}" %>
+        <%= link_to "#{address.nickname}", "?address=#{address.id}" %>
       <% end %>
     </div>
   </div>
