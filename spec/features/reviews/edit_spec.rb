@@ -130,5 +130,19 @@ RSpec.describe 'review edit and update', type: :feature do
       expect(page).to have_content("Edit Review for #{@chain.name}")
       expect(page).to have_content("Title can't be blank, Content can't be blank, and Rating is not a number")
     end
+
+    it 'Cannot enter uri to edit someone elses review' do
+      visit '/login'
+
+      within "#login-form" do
+        fill_in 'Email', with: @user_1.email
+        fill_in 'Password', with: @user_1.password
+        click_on 'Log In'
+      end
+
+      visit edit_item_review_path(@chain, @review_2)
+
+      expect(page).to have_content('Error 403: Forbidden')
+    end
   end
 end
