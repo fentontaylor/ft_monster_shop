@@ -68,6 +68,8 @@ RSpec.describe 'review edit and update', type: :feature do
 
       expect(current_path).to eq("/items/#{@chain.id}")
 
+      expect(page).to have_content('Updated your review, dawg!')
+
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(title)
         expect(page).to have_content(content)
@@ -126,7 +128,7 @@ RSpec.describe 'review edit and update', type: :feature do
       click_on "Update Review"
 
       expect(page).to have_content("Edit Review for #{@chain.name}")
-      expect(page).to have_content('Error message')
+      expect(page).to have_content("Title can't be blank, Content can't be blank, and Rating is not a number")
     end
   end
 end

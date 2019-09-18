@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :visitor_redirect
   before_action :set_item, only: [:new, :create, :edit]
-
+  before_action :set_review, only: [:edit, :update, :destroy]
   def new
     @review = @item.reviews.new
   end
@@ -20,24 +20,29 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
   end
 
   def update
-    review = Review.find(params[:id])
-    if review.update(review_params)
-      
-      redirect_to "/items/#{review.item.id}"
+    if @review.update(review_params)
+      flash[:success] = 'Updated your review, dawg!'
+      redirect_to "/items/#{@review.item.id}"
+    else
+      flash[:error] = @review.errors.full_messages.to_sentence
+      redirect_to edit_item_review_path(@review.item, @review)
+    end
   end
 
   def destroy
-    review = Review.find(params[:id])
-    item = review.item
-    review.destroy
+    item = @review.item
+    @review.destroy
     redirect_to "/items/#{item.id}"
   end
 
   private
+
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
   def set_item
     @item = Item.find(params[:item_id])
