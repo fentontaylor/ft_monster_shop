@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get '/admin/merchants/:id', to: 'admin/merchants#index'
   get '/admin/users/:user_id/orders', to: 'orders#index', as: :admin_user_orders
   get '/admin/users/:user_id/orders/:order_id', to: 'orders#show', as: :admin_user_order
+  get '/admin/users/:user_id/orders/:order_id/edit', to: 'orders#edit', as: :admin_edit_user_order
   patch '/admin/merchants/:id', to: 'admin/merchants#update'
 
   resources :password_resets

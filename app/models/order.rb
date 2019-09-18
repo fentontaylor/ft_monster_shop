@@ -38,4 +38,8 @@ class Order <ApplicationRecord
   def update_status
     self.update(status: 1) if item_orders.pluck(:status).all? {|status| status == "fulfilled"}
   end
+
+  def placed_by?(user)
+    self.user_id == user.id
+  end
 end

@@ -70,5 +70,11 @@ describe Order, type: :model do
 
       expect(@order_1.status).to eq('packaged')
     end
+
+    it '#placed_by?' do
+      user_2 = create(:user)
+      expect(@order_1.placed_by?(@user)).to be true
+      expect(@order_1.placed_by?(user_2)).to be false
+    end
   end
 end
