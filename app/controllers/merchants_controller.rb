@@ -31,7 +31,7 @@ class MerchantsController <ApplicationController
 
   def edit
     user = User.find(session[:user_id])
-    render file: "/public/404" unless current_merchant_admin? && @merchant.works_here?(user.merchant.id)
+    render file: "/public/404", status: 404 unless current_merchant_admin? && @merchant.works_here?(user.merchant.id)
   end
 
   def update
@@ -60,6 +60,6 @@ class MerchantsController <ApplicationController
   end
 
   def valid_merchant
-    render file: "/public/404" unless Merchant.find(params[:id]).status == 'enabled'
+    render file: "/public/404", status: 404 unless Merchant.find(params[:id]).status == 'enabled'
   end
 end

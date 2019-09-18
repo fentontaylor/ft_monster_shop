@@ -2,6 +2,8 @@ class ReviewsController < ApplicationController
   before_action :visitor_redirect
   before_action :set_item, only: [:new, :create, :edit]
   before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :check_author, only: [:edit, :update, :destroy]
+
   def new
     @review = @item.reviews.new
   end
@@ -39,6 +41,11 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def check_author
+    user = User.find(session[:user_id])
+    render file: 'public/403', status: 403 unless @review.written_by?(user)
+  end
 
   def set_review
     @review = Review.find(params[:id])

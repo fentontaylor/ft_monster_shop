@@ -8,7 +8,7 @@ class CartController < ApplicationController
 
   def show
     if current_admin?
-      render file: "/public/404"
+      render file: "/public/404", status: 404
     else
       @items = cart.items
     end

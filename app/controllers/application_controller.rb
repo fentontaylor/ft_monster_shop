@@ -24,11 +24,11 @@ class ApplicationController < ActionController::Base
   end
 
   def visitor_redirect
-    render file: 'public/404' unless current_user
+    render file: 'public/404', status: 404 unless current_user
   end
 
   rescue_from ActionController::RoutingError do |exception|
     logger.error 'Routing error occurred'
-    render file: 'public/404'
+    render file: 'public/404', status: 404
   end
 end

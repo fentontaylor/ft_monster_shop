@@ -2,7 +2,7 @@ class Merchant::DashboardController < Merchant::BaseController
 
   def index
     if current_admin?
-      render file: "/public/404"
+      render file: "/public/404", status: 404
     else
       @user = User.find(session[:user_id])
       @merchant = @user.merchant
