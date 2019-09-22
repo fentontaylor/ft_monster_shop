@@ -84,7 +84,7 @@ describe 'user order show page' do
   end
 
   it "An order that is beyond the pending stage cannot be cancelled" do
-    visit "/orders/#{@order_2.id}"
+    visit "/profile/orders/#{@order_2.id}"
 
     expect(page).to_not have_link("Cancel Order")
   end
