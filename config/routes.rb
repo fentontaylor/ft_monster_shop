@@ -8,16 +8,16 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
-  get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
-  get '/merchant/items', to: 'merchant/dashboard#items'
-  get '/merchant/items/new', to: 'merchant/items#new'
-  get '/merchant/items/:id/edit', to: 'merchant/items#edit', as: :merchant_edit_item
-  post '/merchant/items', to: 'merchant/items#create', as: :merchant_new_item
-  patch '/merchant/items/:id/activity', to: 'merchant/items#update_activity', as: :merchant_update_item_activity
-  patch '/merchant/items/:id', to: 'merchant/items#update', as: :merchant_update_item
-  delete '/merchant/items/:id', to: 'merchant/items#destroy', as: :merchant_delete_item
-  get '/merchant/orders/:id', to: 'merchant/dashboard#order_show', as: :merchant_order_show
-  post '/merchant/orders/:order_id/items/:item_id', to: 'merchant/items#fulfill_item', as: :merchant_fulfill_item
+  # get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
+  # get '/merchant/items', to: 'merchant/dashboard#items'
+  # get '/merchant/items/new', to: 'merchant/items#new'
+  # get '/merchant/items/:id/edit', to: 'merchant/items#edit', as: :merchant_edit_item
+  # post '/merchant/items', to: 'merchant/items#create', as: :merchant_new_item
+  # patch '/merchant/items/:id/activity', to: 'merchant/items#update_activity', as: :merchant_update_item_activity
+  # patch '/merchant/items/:id', to: 'merchant/items#update', as: :merchant_update_item
+  # delete '/merchant/items/:id', to: 'merchant/items#destroy', as: :merchant_delete_item
+  # get '/merchant/orders/:id', to: 'merchant/dashboard#order_show', as: :merchant_order_show
+  # post '/merchant/orders/:order_id/items/:item_id', to: 'merchant/items#fulfill_item', as: :merchant_fulfill_item
 
 
   resources :items, except: [:create, :new] do
@@ -31,9 +31,9 @@ Rails.application.routes.draw do
   patch '/cart/:item_id/:increment_decrement', to: 'cart#increment_decrement'
 
   resources :orders, except: [:index, :destroy]
-  patch '/orders/:order_id/cancel', to: 'orders#cancel', as: :order_cancel
-  patch '/orders/:order_id/ship', to: 'orders#ship', as: :shipped_order
-  get '/profile/orders/:order_id', to: 'orders#show'
+  patch '/orders/:id/cancel', to: 'orders#cancel', as: :order_cancel
+  patch '/orders/:id/ship', to: 'orders#ship', as: :shipped_order
+  get '/profile/orders/:id', to: 'orders#show', as: :profile_order
   get '/profile/orders', to: 'orders#index'
 
   post '/users', to: 'users#create'
