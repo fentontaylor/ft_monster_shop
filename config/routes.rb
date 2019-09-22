@@ -8,6 +8,18 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
+  get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
+  get '/merchant/items', to: 'merchant/dashboard#items'
+  get '/merchant/items/new', to: 'merchant/items#new'
+  get '/merchant/items/:id/edit', to: 'merchant/items#edit', as: :merchant_edit_item
+  post '/merchant/items', to: 'merchant/items#create', as: :merchant_new_item
+  patch '/merchant/items/:id/activity', to: 'merchant/items#update_activity', as: :merchant_update_item_activity
+  patch '/merchant/items/:id', to: 'merchant/items#update', as: :merchant_update_item
+  delete '/merchant/items/:id', to: 'merchant/items#destroy', as: :merchant_delete_item
+  get '/merchant/orders/:id', to: 'merchant/dashboard#order_show', as: :merchant_order_show
+  post '/merchant/orders/:order_id/items/:item_id', to: 'merchant/items#fulfill_item', as: :merchant_fulfill_item
+
+
   resources :items, except: [:create, :new] do
     resources :reviews, except: [:index, :show]
   end
@@ -18,13 +30,9 @@ Rails.application.routes.draw do
   delete '/cart/:item_id', to: 'cart#remove_item'
   patch '/cart/:item_id/:increment_decrement', to: 'cart#increment_decrement'
 
-  resources :orders, only: [:new]
-  get '/orders/:order_id', to: 'orders#show', as: :order
-  post '/orders/:address_id', to: 'orders#create'
+  resources :orders, except: [:index, :destroy]
   patch '/orders/:order_id/cancel', to: 'orders#cancel', as: :order_cancel
   patch '/orders/:order_id/ship', to: 'orders#ship', as: :shipped_order
-  get '/orders/:order_id/edit', to: 'orders#edit', as: :edit_order
-  patch '/orders/:order_id/update', to: 'orders#update', as: :update_order
   get '/profile/orders/:order_id', to: 'orders#show'
   get '/profile/orders', to: 'orders#index'
 
@@ -42,16 +50,6 @@ Rails.application.routes.draw do
   patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
   delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
 
-  get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
-  get '/merchant/items', to: 'merchant/dashboard#items'
-  get '/merchant/items/new', to: 'merchant/items#new'
-  get '/merchant/items/:id/edit', to: 'merchant/items#edit', as: :merchant_edit_item
-  post '/merchant/items', to: 'merchant/items#create', as: :merchant_new_item
-  patch '/merchant/items/:id/activity', to: 'merchant/items#update_activity', as: :merchant_update_item_activity
-  patch '/merchant/items/:id', to: 'merchant/items#update', as: :merchant_update_item
-  delete '/merchant/items/:id', to: 'merchant/items#destroy', as: :merchant_delete_item
-  get '/merchant/orders/:id', to: 'merchant/dashboard#order_show', as: :merchant_order_show
-  post '/merchant/orders/:order_id/items/:item_id', to: 'merchant/items#fulfill_item', as: :merchant_fulfill_item
 
   get '/admin', to: 'admin/dashboard#index', as: :admin_dash
   get '/admin/users', to: 'admin/users#index'

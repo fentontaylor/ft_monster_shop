@@ -11,13 +11,15 @@ class OrdersController < ApplicationController
 
   def new
     @addresses = @user.addresses
-    @selected = Address.find_by(id: params[:address])
+    session[:address] = Address.find_by(id: params[:address])
+    @selected = session[:address]
   end
 
   def create
-    order = @user.orders.create(user_info(@user))
+    order = @user.orders.create(address_info)
     create_item_orders(order)
     session.delete(:cart)
+    session.delete(:address)
     redirect_to "/profile/orders"
     flash[:success] = "Thankz for your business, dawg!"
   end
@@ -97,15 +99,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def user_info(user)
-    info = Hash.new
-    address = user.addresses.find(params[:address_id])
-    info[:name] = user.name
-    info[:address] = address.address
-    info[:city] = address.city
-    info[:state] = address.state
-    info[:zip] = address.zip
-    info
+  def address_info
+    ['id', 'nickname', 'user_id'].each { |k| session[:address].delete k }
+    session[:address]
   end
 
   def order_params
