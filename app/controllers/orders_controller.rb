@@ -88,7 +88,7 @@ class OrdersController < ApplicationController
   end
 
   def set_order
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:order_id] || params[:id])
   end
 
   def set_user
