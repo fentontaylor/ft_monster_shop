@@ -1,6 +1,6 @@
 <h2 align="center">Edit Shipping Details for Order #<%= @order.id %></h2>
 <%= render partial: 'partials/address',
   locals: { resource: @order,
-    path: update_order_path(@order),
+    path: order_path(@order),
     info: @order,
     show_nickname: false } %>

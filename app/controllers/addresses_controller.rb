@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
       redirect_to session.delete(:return_to)
     else
       flash[:error] = @address.errors.full_messages.to_sentence
-      redirect_to user_address_edit_path(@user, @address)
+      redirect_to edit_user_address_path(@user, @address)
     end
   end
 
@@ -47,7 +47,7 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = Address.find(params[:address_id])
+    @address = Address.find(params[:id])
   end
 
   def address_params

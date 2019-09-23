@@ -14,7 +14,7 @@ describe 'User clicks link to add a new address from their profile' do
     end
 
     click_link 'New Address'
-    expect(current_path).to eq(user_address_new_path(user))
+    expect(current_path).to eq(new_user_address_path(user))
 
     fill_in 'Address nickname', with: 'Home'
     fill_in 'Name', with: 'Curly'

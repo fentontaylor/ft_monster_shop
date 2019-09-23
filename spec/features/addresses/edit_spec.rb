@@ -19,7 +19,7 @@ describe 'User clicks Edit Address link from their profile' do
       click_link 'Edit Address'
     end
 
-    expect(current_path).to eq(user_address_edit_path(user, address))
+    expect(current_path).to eq(edit_user_address_path(user, address))
 
     fill_in 'Address nickname', with: 'Home'
     fill_in 'Name', with: 'Curly'

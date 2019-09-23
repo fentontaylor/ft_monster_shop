@@ -14,11 +14,11 @@
     <% if @admin %>
       <p>No Addresses for this user</p>
     <% else %>
-      <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', user_address_new_path(@user), class: 'reg-link' %>?</p>
+      <p>You don't have any addresses on file. Would you like to add a <%= link_to 'New Address', new_user_address_path(@user), class: 'reg-link' %>?</p>
     <% end %>
   <% else %>
     <% unless @admin %>
-      <p><%= link_to 'New Address', user_address_new_path(@user), class: 'btn-small' %></p>
+      <p><%= link_to 'New Address', new_user_address_path(@user), class: 'btn-small' %></p>
     <% end %>
     <% @user.addresses.each do |address| %>
       <section id="address-<%= address.id %>">
@@ -28,9 +28,9 @@
         <p><%= "#{address.city}, #{address.state} #{address.zip}" %></p>
         <% unless @admin %>
           <p>
-            <%= link_to 'Edit Address', user_address_edit_path(@user, address), class: 'reg-link' %>
+            <%= link_to 'Edit Address', edit_user_address_path(@user, address), class: 'reg-link' %>
             <span> | </span>
-            <%= link_to 'Delete Address', user_address_destroy_path(@user, address), method: :delete, class: 'reg-link' %>
+            <%= link_to 'Delete Address', user_address_path(@user, address), method: :delete, class: 'reg-link' %>
           </p>
         <% end %>
       </section>

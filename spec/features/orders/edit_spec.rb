@@ -20,7 +20,7 @@ describe 'User clicks Change Address from pending order show page' do
   end
 
   it 'Takes them to a form to edit the shipping details'do
-    visit order_path(@order)
+    visit profile_order_path(@order)
 
     click_link 'Edit Shipping Details'
 
