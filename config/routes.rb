@@ -8,14 +8,13 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
+  namespace :merchant do
+    resources :items, except: [:index, :show]
+  end
+
   get '/merchant', to: 'merchant/dashboard#index', as: :merchant_dash
   get '/merchant/items', to: 'merchant/dashboard#items'
-  get '/merchant/items/new', to: 'merchant/items#new'
-  get '/merchant/items/:id/edit', to: 'merchant/items#edit', as: :merchant_edit_item
-  post '/merchant/items', to: 'merchant/items#create', as: :merchant_new_item
   patch '/merchant/items/:id/activity', to: 'merchant/items#update_activity', as: :merchant_update_item_activity
-  patch '/merchant/items/:id', to: 'merchant/items#update', as: :merchant_update_item
-  delete '/merchant/items/:id', to: 'merchant/items#destroy', as: :merchant_delete_item
   get '/merchant/orders/:id', to: 'merchant/dashboard#order_show', as: :merchant_order_show
   post '/merchant/orders/:order_id/items/:item_id', to: 'merchant/items#fulfill_item', as: :merchant_fulfill_item
 
@@ -36,7 +35,7 @@ Rails.application.routes.draw do
   get '/profile/orders/:id', to: 'orders#show', as: :profile_order
   get '/profile/orders', to: 'orders#index'
 
-  post '/users', to: 'users#create'
+  # post '/users', to: 'users#create'
   get '/register', to: 'users#new'
   get '/profile', to: 'users#show'
   get '/profile/edit', to: 'users#edit'
@@ -44,12 +43,14 @@ Rails.application.routes.draw do
   get '/profile/edit_password', to: 'users#edit_password'
   patch '/profile/edit_password', to: 'users#update_password'
 
-  get '/users/:user_id/addresses/new', to: 'addresses#new', as: :user_address_new
-  post '/users/:user_id/addresses', to: 'addresses#create', as: :user_address_create
-  get '/users/:user_id/addresses/:address_id/edit', to: 'addresses#edit', as: :user_address_edit
-  patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
-  delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
-
+  resources :users, only: [:create] do
+    resources :addresses, except: [:index, :show]
+  end
+  # get '/users/:user_id/addresses/new', to: 'addresses#new', as: :user_address_new
+  # post '/users/:user_id/addresses', to: 'addresses#create', as: :user_address_create
+  # get '/users/:user_id/addresses/:address_id/edit', to: 'addresses#edit', as: :user_address_edit
+  # patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
+  # delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
 
   get '/admin', to: 'admin/dashboard#index', as: :admin_dash
   get '/admin/users', to: 'admin/users#index'

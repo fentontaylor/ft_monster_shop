@@ -33,12 +33,12 @@
                     <td><p><%= link_to "Activate Item", merchant_update_item_activity_path(item), class: 'btn-small', id: 'green-btn',  method: :patch %></p></td>
                 <% end %>
                 <% if current_merchant_admin? && item.no_orders? == true %>
-                    <td><p><%= link_to "Delete Item", merchant_delete_item_path(item),  class: 'btn-small', id: 'red-btn', method: :delete %></p></td>
+                    <td><p><%= link_to "Delete Item", merchant_item_path(item),  class: 'btn-small', id: 'red-btn', method: :delete %></p></td>
                 <% elsif current_merchant_admin? && item.no_orders? == false %>
                     <td><p>This item has been ordered.</p></td>
                 <% end %>
                 <% if current_merchant_admin? %>
-                    <td><p><%= link_to "Edit #{item.name}", merchant_edit_item_path(item), class: 'btn-small' %></p></td>
+                    <td><p><%= link_to "Edit #{item.name}", edit_merchant_item_path(item), class: 'btn-small' %></p></td>
                 <% end %>
             </tr>
         <% end %>

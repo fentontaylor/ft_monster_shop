@@ -1,4 +1,4 @@
-class MerchantsController <ApplicationController
+class MerchantsController < ApplicationController
   before_action :valid_merchant, only: [:show]
   before_action :set_merchant, only: [:show, :edit, :update, :destroy]
 
