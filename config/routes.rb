@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   get '/profile/orders/:id', to: 'orders#show', as: :profile_order
   get '/profile/orders', to: 'orders#index'
 
-  # post '/users', to: 'users#create'
   get '/register', to: 'users#new'
   get '/profile', to: 'users#show'
   get '/profile/edit', to: 'users#edit'
@@ -46,11 +45,6 @@ Rails.application.routes.draw do
   resources :users, only: [:create] do
     resources :addresses, except: [:index, :show]
   end
-  # get '/users/:user_id/addresses/new', to: 'addresses#new', as: :user_address_new
-  # post '/users/:user_id/addresses', to: 'addresses#create', as: :user_address_create
-  # get '/users/:user_id/addresses/:address_id/edit', to: 'addresses#edit', as: :user_address_edit
-  # patch '/users/:user_id/addresses/:address_id', to: 'addresses#update', as: :user_address_update
-  # delete '/users/:user_id/addresses/:address_id', to: 'addresses#destroy', as: :user_address_destroy
 
   get '/admin', to: 'admin/dashboard#index', as: :admin_dash
   get '/admin/users', to: 'admin/users#index'
