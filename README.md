@@ -3,7 +3,7 @@ BE Mod 2 Week 4/5 Group Project
 
 # How to run Monster Shop 
 
-Clone down this repo, run a local server and visit your local host through a browser to access the app. Aternatively you can try out Monster Shop on heroku here: http://puggly-wuggly.herokuapp.com. From the root page you can access all of Monster Shops features. 
+Clone down this repo, run a local server and visit your local host through a browser to access the app. Aternatively you can try out Monster Shop on heroku here: https://puggly-wuggly-4th.herokuapp.com/. From the root page you can access all of Monster Shops features. 
 
 # Monster Shop Design
 
