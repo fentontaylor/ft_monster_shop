@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- :root {
+:root {
   --bright-link: #17bebb;
   --light-text: #f2f2f2;
   --dark-teal: #00798c;
@@ -21,15 +21,15 @@
   --dark-gray: #303030;
 }
 
- *{
-   box-sizing: border-box;
-   /* border: 1px solid red; */
- }
+* {
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
 
- body {
+body {
   background-color: white;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
- }
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
 
 form {
   align-content: center;
@@ -38,43 +38,51 @@ form {
   width: 60%;
 }
 
-img{
+img {
   width: 50%;
 }
 
-input[type=text],
-input[type=password],
-input[type=email],
+input[type='text'],
+input[type='password'],
+input[type='email'],
 select {
- width: 100%;
- padding: 12px 20px;
- margin: 8px 0;
- display: inline-block;
- border: 1px solid #ccc;
- border-radius: 4px;
- box-sizing: border-box;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-input[type=submit] {
- background-color: var(--bright-link);
- border-radius: 4px;
- border: none;
- color: var(--dark-gray);
- cursor: pointer;
- font-size: 1em;
- margin: 8px 0;
- padding: 14px 20px;
- width: 40%;
+input[type='submit'] {
+  background-color: var(--bright-link);
+  border-radius: 4px;
+  border: none;
+  color: var(--dark-gray);
+  cursor: pointer;
+  font-size: 1em;
+  margin: 8px 0;
+  padding: 14px 20px;
+  width: 40%;
 }
 
-input[type=submit]:hover {
+input[type='submit']:hover {
   background-color: #45a049;
   color: #f2f2f2;
 }
 
 section[id^='address-'],
 .rainbow-display {
-  background-image: linear-gradient(to right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to right,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   border-radius: 10px;
   border: 1px solid var(--dark-teal);
   margin-bottom: 1em;
@@ -89,22 +97,23 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid var(--light-text);
   text-align: center;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #F0F8FF;
+  background-color: #f0f8ff;
 }
 
-ul{
+ul {
   padding: 0px;
   text-align: center;
 }
 
-.address{
+.address {
   text-align: center;
 }
 
@@ -121,14 +130,30 @@ ul{
 
 .bottom-three-reviews {
   width: 30%;
-  background-image: linear-gradient(to left, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to left,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   border-right: 3px solid #002244;
   border-bottom: 3px solid #002244;
 }
 
 .top-three-reviews {
   width: 30%;
-  background-image: linear-gradient(to right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to right,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   border-left: 3px solid #002244;
   border-bottom: 3px solid #002244;
 }
@@ -156,7 +181,8 @@ ul{
   text-align: center;
   text-decoration: none;
 }
-.btn:hover, .btn-small:hover {
+.btn:hover,
+.btn-small:hover {
   background-color: var(--dark-teal);
   color: var(--light-text);
   box-shadow: 2px 2px 5px #707070;
@@ -172,7 +198,7 @@ ul{
   position: absolute;
   background-color: #f1f1f1;
   min-width: 12em;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .address-select a {
@@ -182,7 +208,9 @@ ul{
   display: block;
 }
 
-.address-select a:hover {background-color: #ddd;}
+.address-select a:hover {
+  background-color: #ddd;
+}
 
 .dropdown:hover .address-select {
   display: block;
@@ -195,22 +223,22 @@ ul{
   text-align: center;
 }
 
-.grid-container{
- 	display: grid;
- 	grid-template-columns: repeat(4, 250px);
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
   height: 400px;
   margin-left: 1em;
   margin-top: 1em;
- 	grid-template-rows: auto;
- 	grid-gap: 2%;
+  grid-template-rows: auto;
+  grid-gap: 2%;
 }
 
-.grid-item{
- 	padding: 20px;
+.grid-item {
+  padding: 20px;
   border: solid;
- 	border-radius: 12px;
+  border-radius: 12px;
   border-color: #002244;
- 	text-align: center
+  text-align: center;
 }
 
 .ir-body-1 {
@@ -231,24 +259,32 @@ ul{
 }
 
 .ir-section {
-  background-image: linear-gradient(to bottom right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to bottom right,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   border-left: 1px solid var(--med-gray);
   border-right: 1px solid var(--med-gray);
   margin: 1em 8% 2em 8%;
   padding: 0.5em 1em;
 }
 
-.item-show-grid{
+.item-show-grid {
   width: 60%;
- 	display: grid;
+  display: grid;
   border: solid;
   border-radius: 12px 12px 0 0;
- 	grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.item-show-item{
- 	padding: 20px;
- 	text-align: right;
+.item-show-item {
+  padding: 20px;
+  text-align: right;
 }
 
 .item-stats {
@@ -266,7 +302,7 @@ ul{
 }
 
 .items-main {
-  display:inline-flex;
+  display: inline-flex;
 }
 
 .list-reviews {
@@ -285,7 +321,15 @@ ul{
 }
 
 .merchant-index-link {
-  background-image: linear-gradient(to right, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to right,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   border-radius: 12px;
   border: 2px solid var(--dark-gray);
   color: white;
@@ -300,7 +344,15 @@ ul{
 }
 
 .merchant-index-link:hover {
-  background-image: linear-gradient(to left, #D6BDDD, #DDBDC0, #D8D8BA, #B8D8BC , #ABCADA , #B7B4DB);
+  background-image: linear-gradient(
+    to left,
+    #d6bddd,
+    #ddbdc0,
+    #d8d8ba,
+    #b8d8bc,
+    #abcada,
+    #b7b4db
+  );
   box-shadow: 0 0 10px #00ffff;
   color: var(--med-gray);
   text-shadow: 0 0 3px #ff00ff;
@@ -349,7 +401,8 @@ ul{
   text-align: center;
 }
 
-.reg-link:link, .reg-link:visited {
+.reg-link:link,
+.reg-link:visited {
   color: var(--dark-teal);
   text-decoration: none;
 }
@@ -420,7 +473,7 @@ ul{
   background-color: #b3003b;
 }
 
-#cart-item-img{
+#cart-item-img {
   width: 150px;
 }
 
